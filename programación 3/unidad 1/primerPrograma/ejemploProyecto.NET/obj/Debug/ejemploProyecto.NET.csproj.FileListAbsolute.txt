@@ -1,0 +1,8 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\bin\Debug\ejemploProyecto.NET.exe.config
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\bin\Debug\ejemploProyecto.NET.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\bin\Debug\ejemploProyecto.NET.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\obj\Debug\ejemploProyecto.NET.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\obj\Debug\ejemploProyecto.NET.csproj.SuggestedBindingRedirects.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\obj\Debug\ejemploProyecto.NET.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\obj\Debug\ejemploProyecto.NET.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\ejemploProyecto.NET\obj\Debug\ejemploProyecto.NET.pdb
