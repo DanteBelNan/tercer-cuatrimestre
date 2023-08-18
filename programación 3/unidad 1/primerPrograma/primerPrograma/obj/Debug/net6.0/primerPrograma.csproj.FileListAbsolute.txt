@@ -1,0 +1,15 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\bin\Debug\net6.0\primerPrograma.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\bin\Debug\net6.0\primerPrograma.deps.json
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\bin\Debug\net6.0\primerPrograma.runtimeconfig.json
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\bin\Debug\net6.0\primerPrograma.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\bin\Debug\net6.0\primerPrograma.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.AssemblyInfoInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.AssemblyInfo.cs
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\refint\primerPrograma.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\primerPrograma.genruntimeconfig.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\primerPrograma\primerPrograma\obj\Debug\net6.0\ref\primerPrograma.dll
