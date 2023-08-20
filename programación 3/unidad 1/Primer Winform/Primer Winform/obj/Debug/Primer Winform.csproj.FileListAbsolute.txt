@@ -1,0 +1,11 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\bin\Debug\Primer Winform.exe.config
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\bin\Debug\Primer Winform.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\bin\Debug\Primer Winform.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer Winform.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer Winform.csproj.SuggestedBindingRedirects.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer_Winform.Form1.resources
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer_Winform.Properties.Resources.resources
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer Winform.csproj.GenerateResource.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer Winform.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer Winform.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 1\Primer Winform\Primer Winform\obj\Debug\Primer Winform.pdb
