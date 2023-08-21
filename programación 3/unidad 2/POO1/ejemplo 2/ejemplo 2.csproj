@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{396B2248-E99E-45EA-AE90-ABE5E847B616}</ProjectGuid>
+    <ProjectGuid>{E63682A7-2951-4A7C-A2E4-96D06001240E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ejemplo1</RootNamespace>
-    <AssemblyName>ejemplo1</AssemblyName>
+    <RootNamespace>ejemplo_2</RootNamespace>
+    <AssemblyName>ejemplo 2</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,8 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Botella.cs" />
-    <Compile Include="Persona.cs" />
+    <Compile Include="Articulo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
