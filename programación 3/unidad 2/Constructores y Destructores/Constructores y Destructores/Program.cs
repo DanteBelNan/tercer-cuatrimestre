@@ -13,6 +13,7 @@ namespace Constructores_y_Destructores
             Botella b1 = new Botella("Rojo" , "Plastico");
 
             Console.ReadKey();
+
         }
     }
 }

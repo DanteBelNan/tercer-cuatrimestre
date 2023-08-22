@@ -1,0 +1,8 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\bin\Debug\ejemplo2.exe.config
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\bin\Debug\ejemplo2.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\bin\Debug\ejemplo2.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\obj\Debug\ejemplo2.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\obj\Debug\ejemplo2.csproj.SuggestedBindingRedirects.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\obj\Debug\ejemplo2.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\obj\Debug\ejemplo2.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\POO++\ejemplo2\obj\Debug\ejemplo2.pdb
