@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Constructores_y_Destructores
+namespace Metodos
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Botella b1 = new Botella("Rojo" , "Plastico");
+            Persona p1 = new Persona("Dante");
+            p1.setEdad(20);
+            Console.WriteLine(p1.saludar("Lolo"));
 
             Console.ReadKey();
         }
