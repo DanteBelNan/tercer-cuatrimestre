@@ -1,0 +1,8 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\bin\Debug\Constructores y Destructores.exe.config
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\bin\Debug\Constructores y Destructores.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\bin\Debug\Constructores y Destructores.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\obj\Debug\Constructores y Destructores.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\obj\Debug\Constructores y Destructores.csproj.SuggestedBindingRedirects.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\obj\Debug\Constructores y Destructores.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\obj\Debug\Constructores y Destructores.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 2\Constructores y Destructores\Constructores y Destructores\obj\Debug\Constructores y Destructores.pdb
