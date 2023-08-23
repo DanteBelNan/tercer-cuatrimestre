@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "herencia", "ejemplo1\herenc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejemplo2", "ejemplo2\ejemplo2.csproj", "{0E7CDCAE-9917-4A11-9C35-DE8D2706F281}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "herencia3", "herencia3\herencia3.csproj", "{24CE26D9-220A-49DA-8551-CF7240D14B2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0E7CDCAE-9917-4A11-9C35-DE8D2706F281}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E7CDCAE-9917-4A11-9C35-DE8D2706F281}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E7CDCAE-9917-4A11-9C35-DE8D2706F281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24CE26D9-220A-49DA-8551-CF7240D14B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24CE26D9-220A-49DA-8551-CF7240D14B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24CE26D9-220A-49DA-8551-CF7240D14B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24CE26D9-220A-49DA-8551-CF7240D14B2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

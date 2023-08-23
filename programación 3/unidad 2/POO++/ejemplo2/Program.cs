@@ -44,7 +44,7 @@ namespace ejemplo2
             Console.WriteLine(listaCamionetas.Count);
 
             foreach (Camioneta camioneta in listaCamionetas)
-            {
+            { 
                 Console.WriteLine(camioneta.Color);
             }
 
