@@ -10,6 +10,7 @@ namespace herencia3
     {
         static void Main(string[] args)
         {
+            /*
             Gato g1 = new Gato();
             g1.Nombre = "Pepe";
             Console.WriteLine(g1.comunicarse());
@@ -31,6 +32,12 @@ namespace herencia3
             Animal a1 = g1;
             Gato g2 = (Gato)a1; //Recasteo como un gato aunque antes lo haya casteado
             //como un animal
+            */
+
+            //Ahora, puedo hacer una lista con una interfaz
+            List<Flyable> listaVoladores = new List<Flyable>();
+            listaVoladores.Add(new Pajaro());
+            //Puedo agarrarle cualquier objeto que implemente una interfaz
             Console.ReadKey();
         }
     }
