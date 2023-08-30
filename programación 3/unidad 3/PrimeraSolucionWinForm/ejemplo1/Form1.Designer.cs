@@ -28,13 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnSaludar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // btnSaludar
+            // 
+            this.btnSaludar.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnSaludar.Location = new System.Drawing.Point(134, 120);
+            this.btnSaludar.Name = "btnSaludar";
+            this.btnSaludar.Size = new System.Drawing.Size(183, 83);
+            this.btnSaludar.TabIndex = 0;
+            this.btnSaludar.Text = "SALUDAR";
+            this.btnSaludar.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(205, 86);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(526, 382);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnSaludar);
+            this.Name = "Form1";
+            this.Text = "primeraApp";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnSaludar;
+        private System.Windows.Forms.Label label1;
     }
 }
 
