@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace herencia
 {
-    internal class Tester : Persona
-    {
+    sealed internal class Tester : Persona
+    {//Estamos en sealed, que evita que se pueda heredar de esta clase
     }
 }
