@@ -19,7 +19,21 @@ namespace ejemplo1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //MessageBox.Show("Programa cargado");
         }
+
+        private void btnSaludar_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Hola mundo");
+            string texto = txtNombre.Text;
+            labelSaludo.Text = "Hola" + texto;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //MessageBox.Show("Programa cerrado");
+        }
+
+
     }
 }
