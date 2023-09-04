@@ -22,7 +22,7 @@ Create Table Platos(
 
 Go
 Create Table Recetas(
-    IDReceta int not null primary key identity(1,1),
+    IDReceta int not null,
     IDPlato int not null,
     IDIngrediente int not null,
     Cantidad decimal(6, 2)   not null,
@@ -31,7 +31,7 @@ Create Table Recetas(
 
 go
 Create table UnidadesMedida(
-    IDUnidadMedida int not null,
+    IDUnidadMedida TINYINT not null,
     Nombre varchar(50),
 
     Primary Key(IDUnidadMedida),
@@ -54,6 +54,7 @@ go
 Alter Table Platos
 Add CONSTRAINT CHK_Dificultad Check (Dificultad >= 0 and Dificultad <= 5)
 
+go
 Alter Table Recetas
     ADD CONSTRAINT PK_Recetas PRIMARY KEY (IDPlato, IDIngrediente)
 
