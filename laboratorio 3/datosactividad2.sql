@@ -33,4 +33,15 @@ GO
 Insert into Ingredientes(IDIngrediente,Nombre,Vegano,Vegetariano,Celiaco)
 Values (4, 'Cebolla', 1,1,1)
 
+insert Into Recetas(idreceta,idplato, IDIngrediente, cantidad, IDUnidadMedida) VALUES
+(1,1,1,200,1),
+(2,1,2,100,1),
+(3,2,3,2,4),
+(4,2,4,2,4)
+
+Update recetas set Cantidad = 3 where IDPlato = 2 and IDIngrediente = 4
+
+delete from Recetas where idplato = 1
+
+
 
