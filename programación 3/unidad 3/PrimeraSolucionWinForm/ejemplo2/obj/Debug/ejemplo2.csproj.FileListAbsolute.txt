@@ -9,3 +9,4 @@ C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci�
 C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 3\PrimeraSolucionWinForm\ejemplo2\obj\Debug\ejemplo2.csproj.CoreCompileInputs.cache
 C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 3\PrimeraSolucionWinForm\ejemplo2\obj\Debug\ejemplo2.exe
 C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 3\PrimeraSolucionWinForm\ejemplo2\obj\Debug\ejemplo2.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\unidad 3\PrimeraSolucionWinForm\ejemplo2\obj\Debug\ejemplo2.frmPrincipal.resources
