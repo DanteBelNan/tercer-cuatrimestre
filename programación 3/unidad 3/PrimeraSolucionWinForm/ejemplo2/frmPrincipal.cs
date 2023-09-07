@@ -19,14 +19,23 @@ namespace ejemplo2
 
         private void perfilPersonaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            foreach (var item in Application.OpenForms)
+            {
+                if (item.GetType() == typeof(Form1))
+                {
+                    MessageBox.Show("Esta ventana ya esta abierta...");
+                    return;
+                }
+            }
+
            Form1 ventana = new Form1();
-            ventana.ShowDialog();
+            ventana.MdiParent = this;
+            ventana.Show();
         }
 
         private void tsbPerfilPersona_Click(object sender, EventArgs e)
         {
-            Form1 ventana = new Form1();
-            ventana.ShowDialog();
+            perfilPersonaToolStripMenuItem_Click((object) sender, e);
         }
     }
 }
