@@ -11,7 +11,11 @@ namespace herencia
     {
         static void Main(string[] args)
         {
-            
+
+            DateTime fecha = DateTime.Now;
+            Console.WriteLine(fecha.AddDays(2913291).ToString());
+
+
             Developer d1 = new Developer();
             Tester t1 = new Tester();
             Lider l1 = new Lider();
