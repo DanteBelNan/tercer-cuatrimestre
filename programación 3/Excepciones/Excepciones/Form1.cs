@@ -26,7 +26,6 @@ namespace Excepciones
                 num1 = int.Parse(tb1.Text);
                 num2 = int.Parse(tb2.Text);
                 res = num1 / num2;
-
                 lblResultado.Text = "= " + res;
 
             }
@@ -42,10 +41,36 @@ namespace Excepciones
             {
                 MessageBox.Show("Numero muy grande...");
             }
-            catch {Exception ex }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error no conocido...");
             }
+            finally
+            {
+                //Aca por ejemplo, se pueden poner cierres de conecciones
+                //Con la DB, evitando que no se cierre si entra al catch
+            }
+        }
+
+        private int calcula()
+        {
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+                //si llamo este metodo en otra función, el throw
+                //representa una devolución de error, lo que hace 
+                //que al ejecutarse este throw, en el metodo que se llamo
+                //se entre al catch
+            }
+            finally
+            {
+
+            }
+            return 0;
         }
     }
 }
