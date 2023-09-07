@@ -13,7 +13,7 @@ namespace herencia
         {
 
             DateTime fecha = DateTime.Now;
-            Console.WriteLine(fecha.AddDays(2913291).ToString());
+            Console.WriteLine(fecha.ToString());
 
 
             Developer d1 = new Developer();
