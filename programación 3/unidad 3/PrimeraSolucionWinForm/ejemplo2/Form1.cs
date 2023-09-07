@@ -64,5 +64,10 @@ namespace ejemplo2
             string msj3 = " Estudios: " + estudios + " Sueldo: " + sueldo;
             MessageBox.Show(msj + msj2 + msj3);
         }
+
+        private void cboEstudios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
