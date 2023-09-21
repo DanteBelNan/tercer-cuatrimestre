@@ -50,14 +50,27 @@ CREATE TABLE BilleteraVirtual (
     FOREIGN KEY (idPersona) REFERENCES usuarios(id)
 );
 
+CREATE TABLE Banco (
+    id INT PRIMARY KEY IDENTITY(1, 1),
+    nombre varchar(255)
+);
+
+CREATE TABLE Marca (
+    id INT PRIMARY KEY IDENTITY(1, 1),
+    nombre varchar(255)
+);
+
+
 CREATE TABLE Tarjeta (
     id INT PRIMARY KEY IDENTITY(1, 1),
     numTarjeta VARCHAR(16) UNIQUE,
     numSeguridad VARCHAR(4),
     emision DATE,
     vencimiento DATE,
-    banco VARCHAR(255),
-    marca VARCHAR(255)
+    idBanco int,
+    idMarca int
+    FOREIGN KEY (idBanco) REFERENCES banco(id),
+    FOREIGN KEY (idMarca) REFERENCES marca(id)
 );
 
 CREATE TABLE BilleteraVirtualXTarjeta (
@@ -71,19 +84,19 @@ CREATE TABLE BilleteraVirtualXTarjeta (
 
 -- Insertar datos en la tabla Provincia
 INSERT INTO Provincia (nombre) VALUES
-    ('Provincia 1'),
-    ('Provincia 2'),
-    ('Provincia 3'),
-    ('Provincia 4'),
-    ('Provincia 5');
+    ('Rio Negro'),
+    ('Cordoba'),
+    ('Tierra del Fuego'),
+    ('Misiones'),
+    ('Buenos Aires');
 
 -- Insertar datos en la tabla Localidad
 INSERT INTO Localidad (nombre) VALUES
-    ('Localidad 1'),
-    ('Localidad 2'),
-    ('Localidad 3'),
-    ('Localidad 4'),
-    ('Localidad 5');
+    ('Bariloche'),
+    ('Cordoba'),
+    ('Ushuaia'),
+    ('Posadas'),
+    ('Vicente Lopez');
 
 -- Insertar datos en la tabla usuarios
 INSERT INTO usuarios (codigo, nombre, apellido, dni, genero, edad, nacimiento, domicilio, idlocalidad, idprovincia, celular, telefono, mail, situacion_crediticia) VALUES
@@ -96,7 +109,8 @@ INSERT INTO usuarios (codigo, nombre, apellido, dni, genero, edad, nacimiento, d
     ('U007', 'Usuario7', 'Apellido7', 7891234567, 'Masculino', 32, '1989-12-30', 'Dirección7', 2, 2, 888888888, NULL, 'usuario7@example.com', 2),
     ('U008', 'Usuario8', 'Apellido8', 8912345678, 'Femenino', 27, '1996-06-15', 'Dirección8', 3, 3, NULL, 4444444444, 'usuario8@example.com', 1),
     ('U009', 'Usuario9', 'Apellido9', 9123456789, 'Masculino', 45, '1977-09-08', 'Dirección9', 4, 4, 999999999, 9999999999, 'usuario9@example.com', 4),
-    ('U010', 'Usuario10', 'Apellido10', 1234567890, 'Femenino', 29, '1994-04-03', 'Dirección10', 5, 5, 123123123, NULL, 'usuario10@example.com', 2);
+    ('U010', 'Usuario10', 'Apellido10', 1234567890, 'Femenino', 29, '1994-04-03', 'Dirección10', 5, 5, 123123123, NULL, 'usuario10@example.com', 2),
+    ('notarj', 'NOTARJ', 'NOTARJ', 12341234, 'Masculino', 45, '1977-09-08', 'Dirección9', 4, 4, 999999999, 9999999999, 'usuario9@example.com', 4);
 
 -- Insertar datos en la tabla BilleteraVirtual
 INSERT INTO BilleteraVirtual (idPersona, apellido, nombre, edad, creacioncuenta, alias, saldo) VALUES
@@ -111,18 +125,29 @@ INSERT INTO BilleteraVirtual (idPersona, apellido, nombre, edad, creacioncuenta,
     (9, 'Apellido9', 'Usuario9', 45, '2023-09-08', 'Alias9', 2400),
     (10, 'Apellido10', 'Usuario10', 29, '2023-10-03', 'Alias10', 900);
 
+-- Insertar datos en la tabla Banco
+INSERT INTO Banco (nombre) VALUES
+    ('Galicia') , ('Santander'), ('HCBC'), ('BBVA');
+
+
+-- Insertar datos en la tabla Marca
+INSERT INTO Marca (nombre) VALUES
+    ('VISA') , ('MASTERCARD'), ('UALA'), ('LEMON'), ('PEPITOS');
+
+    
+
 -- Insertar datos en la tabla Tarjeta
-INSERT INTO Tarjeta (numTarjeta, numSeguridad, emision, vencimiento, banco, marca) VALUES
-    ('1111111111111111', '123', '2023-01-01', '2025-12-31', 'Banco A', 'Marca A'),
-    ('2222222222222222', '456', '2023-02-01', '2026-01-31', 'Banco B', 'Marca B'),
-    ('3333333333333333', '789', '2023-03-01', '2027-02-28', 'Banco C', 'Marca C'),
-    ('4444444444444444', '012', '2023-04-01', '2027-03-31', 'Banco D', 'Marca D'),
-    ('5555555555555555', '345', '2023-05-01', '2028-04-30', 'Banco E', 'Marca E'),
-    ('6666666666666666', '678', '2023-06-01', '2028-05-31', 'Banco F', 'Marca F'),
-    ('7777777777777777', '901', '2023-07-01', '2029-06-30', 'Banco G', 'Marca G'),
-    ('8888888888888888', '234', '2023-08-01', '2029-07-31', 'Banco H', 'Marca H'),
-    ('9999999999999999', '567', '2023-09-01', '2030-08-31', 'Banco I', 'Marca I'),
-    ('1010101010101010', '890', '2023-10-01', '2030-09-30', 'Banco J', 'Marca J');
+INSERT INTO Tarjeta (numTarjeta, numSeguridad, emision, vencimiento, idBanco, idMarca) VALUES
+    ('1111111111111111', '123', '2023-01-01', '2025-12-31', 1, 1),
+    ('2222222222222222', '456', '2023-02-01', '2026-01-31', 2, 2),
+    ('3333333333333333', '789', '2023-03-01', '2027-02-28', 3, 3),
+    ('4444444444444444', '012', '2023-04-01', '2027-03-31', 4, 4),
+    ('5555555555555555', '345', '2023-05-01', '2028-04-30', 1, 1),
+    ('6666666666666666', '678', '2023-06-01', '2028-05-31', 2, 2),
+    ('7777777777777777', '901', '2023-07-01', '2029-06-30', 3, 3),
+    ('8888888888888888', '234', '2023-08-01', '2029-07-31', 4, 4),
+    ('9999999999999999', '567', '2023-09-01', '2030-08-31', 1, 1),
+    ('1010101010101010', '890', '2023-10-01', '2030-09-30', 2, 2);
 
 -- Insertar datos en la tabla BilleteraVirtualXTarjeta (relación entre billetera y tarjeta)
 -- Asignación aleatoria de tarjetas a billeteras
@@ -134,35 +159,94 @@ ORDER BY NEWID();
 
 
 
--- 1 Listado con las localidades, su ID, nombre y el nombre de la provincia a la que pertenece. 
-SELECT 
-    L.id,
-    L.nombre AS NombreLocalidad,
-    P.nombre AS NombreProvincia
-FROM 
-    localidad L
-INNER JOIN 
-    provincia P ON L.id = P.id;
+-- 1 Por cada tarjeta obtener el número, la fecha de emisión, el nombre del banco y la marca de la tarjeta. Incluir al listado la cantidad de días restantes para el vencimiento de la tarjeta.
+SELECT T.numTarjeta, T.emision, B.nombre, M.nombre, DATEDIFF(DAY, GETDATE(), T.vencimiento) as diasRestantes
+FROM Tarjeta as T
+LEFT JOIN Banco as B
+ON T.idBanco = B.id
+LEFT JOIN Marca as M
+ON T.idMarca = M.id
 
 -- 2 Listado que informe el ID de la multa, el monto a abonar y los datos del agente que la realizó. Debe incluir los apellidos y nombres de los agentes. Así como también la fecha de nacimiento y la edad.
+SELECT U.apellido, U.nombre, U.edad, B.alias, DATEDIFF(DAY, B.creacioncuenta, GETDATE()) as Antiguedad, 'Juan Perez' as Agente
+FROM usuarios AS U
+INNER JOIN BilleteraVirtual B
+ON U.id = B.idPersona
 
--- 3 Listar todos los datos de todas las multas realizadas por agentes que a la fecha de hoy tengan más de 5 años de antigüedad.
 
--- 4 Listar todos los datos de todas las multas cuyo importe de referencia supere los $15000.
+-- 3 Por cada usuario indicar Apellidos, Nombre y una categorización a partir del saldo de la billetera. La categorización es:
+-- 'Gold' → Más de un millón de pesos
+-- 'Silver' → Más de 500 mil y hasta un millón de pesos
+-- 'Bronze' → Entre 50 mil y 500 mil
+-- 'Copper' → Menos de 50 mil
+SELECT U.apellido, 
+       U.nombre,
+       CASE
+        WHEN BV.saldo > 1000000 THEN 'Gold'
+        WHEN BV.saldo > 500000 THEN 'Silver'
+        WHEN BV.saldo >= 50000 AND BV.saldo <= 500000 THEN 'Bronze'
+        ELSE 'Cooper'
+       END AS Categoria
 
--- 5 Listar los nombres y apellidos de los agentes, sin repetir, que hayan labrado multas en la provincia de Buenos Aires o en Cordoba.
+FROM usuarios U
+INNER JOIN BilleteraVirtual BV
+on U.ID = BV.idPersona
 
--- 6 Listar los nombres y apellidos de los agentes, sin repetir, que hayan labrado multas del tipo "Exceso de velocidad".
+-- 4 Por cada usuario indicar apellidos, nombres, domicilio, nombre de la localidad y provincia.
 
--- 7 Listar apellidos y nombres de los agentes que no hayan labrado multas.
+SELECT U.apellido, U.nombre, U.domicilio, L.nombre, P.nombre
+FROM USUARIOS U
 
--- 8 Por cada multa, lista el nombre de la localidad y provincia, el tipo de multa, los apellidos y nombres de los agentes y su legajo, el monto de la multa y la diferencia en pesos en relación al tipo de infracción cometida.
+INNER JOIN Localidad L ON L.id = U.idlocalidad
+INNER JOIN Provincia P on P.id = U.idprovincia
 
--- 9 Listar las localidades en las que no se hayan registrado multas.
+-- 5 Listar los usuarios con nivel de situación crediticia Excelente y que residan en Buenos Aires.
+SELECT * FROM usuarios U
+INNER JOIN Provincia P ON U.idprovincia = P.id
+WHERE U.situacion_crediticia = 5 AND p.nombre = 'Buenos Aires'
 
--- 10 Listar los datos de las multas pagadas que se hayan labrado en la provincia de Buenos Aires.
+-- 6 Listar los nombres, apellidos y celulares de los usuarios que residan en Córdoba
+SELECT U.nombre, u.apellido, u.celular FROM usuarios U
+INNER JOIN Provincia P ON U.idprovincia = P.id
+WHERE p.nombre = 'Cordoba'
 
--- 11 Listar el ID de la multa, la patente, el monto y el importe de referencia a partir del tipo de infracción cometida. También incluir una columna llamada TipoDeImporte a partir de las siguientes condiciones:
--- 'Punitorio' si el monto de la multa es mayor al importe de referencia
--- 'Leve' si el monto de la multa es menor al importe de referencia
--- 'Justo' si el monto de la multa es igual al importe de referencia
+-- 7 Listar los nombres y apellidos de los clientes que no posean tarjeta
+SELECT U.nombre, u.apellido, BV.idPersona, BVXT.id, T.id
+FROM usuarios u
+LEFT JOIN BilleteraVirtual BV on BV.idPersona = U.id
+LEFT Join BilleteraVirtualXTarjeta BVXT on BV.idBilleteraVirtual = BVXT.idBilletera
+LEFT JOIN Tarjeta T on T.id = BVXT.idTarjeta
+where BVXT.idTarjeta is null
+
+
+-- 8 Listar los nombres, apellidos, alias de billetera, nombres de tarjetas y bancos de todos los usuarios. Si el usuario no tiene tarjetas debe figurar igualmente en el listado.
+SELECT U.nombre, u.apellido, BV.alias, T.numTarjeta, B.nombre
+
+FROM usuarios U 
+
+LEFT JOIN BilleteraVirtual BV on BV.idPersona = U.id
+LEFT JOIN BilleteraVirtualXTarjeta BVXT on BVXT.idBilletera = BV.idBilleteraVirtual
+LEFT JOIN Tarjeta T on T.id = BVXT.idTarjeta
+LEFT JOIN BANCO B on B.id = T.idBanco
+
+ORDER BY u.nombre ASC
+-- 9 Listar nombres y apellidos del usuario que tenga la tarjeta que más tiempo falta que llegue a su vencimiento.
+SELECT TOP(1) U.nombre, U.apellido
+FROM usuarios U
+INNER JOIN BilleteraVirtual BV ON BV.idPersona = U.id
+INNER JOIN BilleteraVirtualXTarjeta BVXT ON BVXT.idBilletera = BV.idBilleteraVirtual
+INNER JOIN Tarjeta T ON T.id = BVXT.idTarjeta
+WHERE T.vencimiento > GETDATE()
+ORDER BY DATEDIFF(DAY, GETDATE(), T.vencimiento) ASC;
+
+-- 10 Listar las distintas marcas de tarjeta, sin repetir, de los usuarios.
+SELECT DISTINCT M.nombre
+FROM USUARIOS U
+INNER JOIN BilleteraVirtual BV ON BV.idPersona = U.id
+INNER JOIN BilleteraVirtualXTarjeta BVXT ON BVXT.idBilletera = BV.idBilleteraVirtual
+INNER JOIN Tarjeta T ON T.id = BVXT.idTarjeta
+INNER JOIN Marca M on T.idMarca = M.id
+
+-- 11 Listar todos los datos de los usuarios que tengan una situación crediticia diferente de 'Excelente', 'Regular' y 'No confiable'.
+SELECT * FROM usuarios
+WHERE situacion_crediticia %2 = 0
