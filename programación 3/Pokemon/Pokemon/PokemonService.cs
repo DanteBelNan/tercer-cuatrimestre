@@ -24,7 +24,7 @@ namespace Pokemon
                 
                 connection.ConnectionString = "server=.\\SQLEXPRESS; database=PokedexDB; integrated security=true";
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "Select Numero,Nombre,Descripcion, UrlImagen FROM Pokemons";
+                command.CommandText = "Select P.Numero, P.Nombre, P.Descripcion, P.UrlImagen, t.Nombre as Tipo, d.Nombre as Debilidad\r\nFROM Pokemons as P\r\nINNER JOIN Tipos as T On T.id = P.idTipo\r\nINNER JOIN Tipos as D on D.id = P.idDebilidad";
                 command.Connection = connection;
                 connection.Open();
 
@@ -37,6 +37,8 @@ namespace Pokemon
                     aux.Nombre = (string)reader["Nombre"];
                     aux.Descripcion = (string)reader["Descripcion"];
                     aux.urlImagen = (string)reader["UrlImagen"];
+                    aux.Tipo = (string)reader["Tipo"];
+                    aux.Debilidad = (string)reader["Debilidad"];
 
                     pokemons.Add(aux);
                 }

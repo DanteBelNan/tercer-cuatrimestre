@@ -30,6 +30,9 @@ namespace Pokemon
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
         {
+            dgvPokemons.Columns["UrlImagen"].Visible = false;
+            dgvPokemons.Columns["Activo"].Visible = false;
+            dgvPokemons.Columns["Evolucion"].Visible = false;
             Pokemon pokemon = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
             cargarImagen(pokemon.urlImagen);
         }
