@@ -1,0 +1,9 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\bin\Debug\Servicio.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\bin\Debug\Servicio.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\bin\Debug\Models.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\bin\Debug\Models.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\obj\Debug\Servicio.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\obj\Debug\Servicio.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\obj\Debug\Servicio.csproj.CopyComplete
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\obj\Debug\Servicio.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Servicio\obj\Debug\Servicio.pdb

@@ -9,3 +9,8 @@ C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci�
 C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\obj\Debug\Pokemon.exe
 C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\obj\Debug\Pokemon.pdb
 C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\obj\Debug\Pokemon.Main.resources
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\bin\Debug\Models.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\bin\Debug\Models.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\obj\Debug\Pokemon.csproj.CopyComplete
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\bin\Debug\Servicio.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programaci처n 3\Pokemon\Pokemon\bin\Debug\Servicio.pdb

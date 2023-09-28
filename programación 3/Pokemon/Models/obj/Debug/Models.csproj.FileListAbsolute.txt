@@ -1,0 +1,6 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Models\bin\Debug\Models.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Models\bin\Debug\Models.pdb
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Models\obj\Debug\Models.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Models\obj\Debug\Models.dll
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Models\obj\Debug\Models.pdb

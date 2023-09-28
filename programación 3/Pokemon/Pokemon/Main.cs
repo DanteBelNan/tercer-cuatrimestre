@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Servicio;
 
 namespace Pokemon
 {
     public partial class Main : Form
     {
-        private List<Pokemon> list = new List<Pokemon>();
+        private List<Pkmn> list = new List<Pkmn>();
         public Main()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace Pokemon
             dgvPokemons.Columns["UrlImagen"].Visible = false;
             dgvPokemons.Columns["Activo"].Visible = false;
             dgvPokemons.Columns["Evolucion"].Visible = false;
-            Pokemon pokemon = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            Pkmn pokemon = (Pkmn)dgvPokemons.CurrentRow.DataBoundItem;
             cargarImagen(pokemon.urlImagen);
         }
 

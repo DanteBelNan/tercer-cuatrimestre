@@ -1,0 +1,8 @@
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokedex.csproj.AssemblyReference.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokedex.csproj.SuggestedBindingRedirects.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokemon.Main.resources
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokemon.Properties.Resources.resources
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokedex.csproj.GenerateResource.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokedex.csproj.CoreCompileInputs.cache
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokemon.exe
+C:\Users\dante\OneDrive\Escritorio\Educacion\UTN\tercer-cuatrimestre\programación 3\Pokemon\Pokemon\obj\Debug\Pokemon.pdb

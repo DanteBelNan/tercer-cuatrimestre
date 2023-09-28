@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Net;
+using Models;
 
-namespace Pokemon
+namespace Servicio
 {
-    internal class PokemonService
+    public class PokemonService
     {
-        public List<Pokemon> getAllPokemons()
+        public List<Pkmn> getAllPokemons()
         {
-            List<Pokemon> pokemons = new List<Pokemon>();
+            List<Pkmn> pokemons = new List<Pkmn>();
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
             SqlDataReader reader;
@@ -32,7 +33,7 @@ namespace Pokemon
 
                 while (reader.Read())
                 {
-                    Pokemon aux = new Pokemon();
+                    Pkmn aux = new Pkmn();
                     aux.Numero = (int)reader["Numero"];
                     aux.Nombre = (string)reader["Nombre"];
                     aux.Descripcion = (string)reader["Descripcion"];
