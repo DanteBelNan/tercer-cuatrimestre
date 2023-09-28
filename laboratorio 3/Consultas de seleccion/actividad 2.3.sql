@@ -81,6 +81,14 @@ CREATE TABLE BilleteraVirtualXTarjeta (
     FOREIGN KEY (idBilletera) REFERENCES BilleteraVirtual(idBilleteraVirtual)
 );
 
+CREATE TABLE Movimientos (
+    id INT PRIMARY KEY IDENTITY(1, 1),
+    emisor INT,
+    monto INT,
+    fecha DATETIME
+    FOREIGN KEY(emisor) REFERENCES BilleteraVirtual(idBilleteraVirtual),
+)
+
 
 -- Insertar datos en la tabla Provincia
 INSERT INTO Provincia (nombre) VALUES
@@ -156,6 +164,32 @@ SELECT TOP 10 id, idBilleteraVirtual
 FROM Tarjeta, BilleteraVirtual
 ORDER BY NEWID();
 
+-- Insertar 20 registros de ejemplo en la tabla "Movimientos" con IDs de billetera virtual en el rango de 10001 a 10010 y montos diferentes
+INSERT INTO Movimientos (emisor, monto, fecha)
+VALUES
+    (10001, 1000, '2023-01-01'),
+    (10002, 2000, '2023-01-01'),
+    (10003, 500, '2023-01-01'),
+    (10004, 800, '2023-01-01'),
+    (10005,  1200, '2023-01-01'),
+    (10006,  700, '2023-01-01'),
+    (10007,  300, '2023-01-01'),
+    (10008,  900, '2023-01-01'),
+    (10009,  600, '2023-01-01'),
+    (10010, 1500, '2023-01-01'),
+    (10001, 400, '2023-01-01'),
+    (10003, 750, '2023-01-01'),
+    (10002, 1100, '2023-01-01'),
+    (10004, 300, '2023-01-01'),
+    (10005, 600, '2023-01-01'),
+    (10006, 800, '2023-01-01'),
+    (10008, 1200, '2023-01-01'),
+    (10009, 950, '2023-01-01'),
+    (10010, 47000, '2023-08-15');
+
+
+
+
 -- 1 Listado con la cantidad de usuarios que tienen una situación crediticia con ID menor a 3.
     SELECT COUNT(*) AS CantSitCredBaja FROM usuarios WHERE situacion_crediticia >= 3
 
@@ -177,23 +211,75 @@ ORDER BY NEWID();
 -- 6 Listado con el promedio de días que restan para el vencimiento de las tarjetas no vencidas.
     SELECT AVG(DATEDIFF(DAY,GETDATE(),vencimiento)) as promVencimiento FROM Tarjeta
     where GETDATE() < vencimiento
--- 7 Listado con la fecha de nacimiento de la persona más joven en tener una billeter
-    
+
+-- 7 Listado con la fecha de nacimiento de la persona más joven en tener una billetera
+    SELECT MIN(u.nacimiento) FROM BilleteraVirtual as BV
+    INNER JOIN usuarios as u on BV.idPersona = u.id
+
+
 -- 8 Listado con el total de dinero acreditado mediante movimientos.. 
+    SELECT SUM(monto) AS TotalAcreditado FROM Movimientos
 
 -- 9 Por cada cliente, apellidos, nombres, alias de la billetera y cantidad de movimientos registrados.
+    SELECT u.apellido, u.nombre, bV.alias, count(*) as Movimientos
+    FROM usuarios as u
+    INNER JOIN BilleteraVirtual as BV on BV.idPersona = u.id
+    LEFT JOIN Movimientos as M on M.emisor = BV.idBilleteraVirtual
+    GROUP BY u.apellido, u.nombre, BV.alias;
+
 
 -- 10 Listar los clientes que hayan registrado débitos por más de $15000
+SELECT u.apellido, u.nombre
+FROM usuarios AS u
+INNER JOIN BilleteraVirtual AS BV ON BV.idPersona = u.id
+INNER JOIN Movimientos AS M ON M.emisor = BV.idBilleteraVirtual
+WHERE m.monto < 0
+GROUP BY u.apellido, u.nombre
+HAVING SUM(M.monto) < -15000;
 
 -- 11 Listar el total debitado discriminado por nivel de situación crediticia
 
+SELECT U.situacion_crediticia, SUM(M.monto) as total_debitado
+FROM usuarios AS U
+INNER JOIN BilleteraVirtual AS BV ON BV.idPersona = U.id
+INNER JOIN Movimientos AS M ON M.emisor = BV.idBilleteraVirtual
+WHERE M.monto < 0
+GROUP BY U.situacion_crediticia
+ORDER BY U.situacion_crediticia;
+
+
 -- 12 Listar el nombre y apellido del usuario que haya realizado más depósitos.
+SELECT TOP 1 WITH TIES --Si hay empate trae varios
+    u.apellido, u.nombre
+FROM usuarios as u
+INNER JOIN BilleteraVirtual as BV on BV.idPersona = u.id
+INNER JOIN Movimientos as M on M.emisor = BV.idBilleteraVirtual
+WHERE M.monto > 0
+GROUP BY u.apellido, u.nombre
+Order by count(*) desc;
 
 -- 13 Listar la cantidad de usuarios que hayan registrado movimientos de tipo débito.
+SELECT COUNT(distinct u.id) as cant_usrs_debitos
+FROM usuarios as u
+INNER JOIN BilleteraVirtual AS BV ON BV.idPersona = u.id
+INNER JOIN Movimientos AS M ON M.emisor = BV.idBilleteraVirtual
+WHERE M.monto < 0;
 
 -- 14 Listar por cada billetera el alias y la cantidad de transferencias realizadas (la billetera es el origen de la transferencia). Si hay billeteras que no tienen transferencias realizadas deben figurar en el listado contabilizando 0.
+SELECT BV.alias, COALESCE(COUNT(m.id),0) as CantidadTransferencias
+FROM BilleteraVirtual as BV
+LEFT JOIN Movimientos as M on M.emisor = bv.idBilleteraVirtual
+GROUP BY BV.alias
 
 -- 15 Listar los apellidos y nombres y el alias de billeteras de aquellos clientes que hayan movilizado más de $40000 durante el mes de agosto de 2023.
+SELECT u.apellido, u.nombre, bv.alias
+FROM usuarios as u
+INNER JOIN BilleteraVirtual as BV on BV.idPersona = U.id
+INNER JOIN Movimientos as M on M.emisor = BV.idBilleteraVirtual
+WHERE m.fecha >= '2023-08-01' and m.fecha < '2023-09-01'
+GROUP BY u.apellido, u.nombre, bv.alias
+HAVING SUM(m.monto) > 40000;
+
 
 
 
