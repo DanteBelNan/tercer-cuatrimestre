@@ -25,7 +25,7 @@ namespace Servicio
                 
                 connection.ConnectionString = "server=.\\SQLEXPRESS; database=PokedexDB; integrated security=true";
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "Select P.Numero, P.Nombre, P.Descripcion, P.UrlImagen, t.Nombre as Tipo, d.Nombre as Debilidad\r\nFROM Pokemons as P\r\nINNER JOIN Tipos as T On T.id = P.idTipo\r\nINNER JOIN Tipos as D on D.id = P.idDebilidad";
+                command.CommandText = "\r\nSELECT P.Numero, P.Nombre, P.Descripcion, ISNULL(P.UrlImagen,'')as UrlImagen, ISNULL(T.Nombre, 'Sin Tipo') as Tipo, ISNULL(D.Nombre, 'Sin Debilidad') as Debilidad FROM Pokemons as P LEFT JOIN Tipos as T ON T.id = P.idTipo LEFT JOIN Tipos as D ON D.id = P.idDebilidad";
                 command.Connection = connection;
                 connection.Open();
 
@@ -54,6 +54,23 @@ namespace Servicio
             }
 
             return pokemons;
+        }
+    
+        public void add(Pkmn pkmn)
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            try
+            {
+                accesoDatos.setQuery("Insert into Pokemons (Numero,Nombre,Descripcion,Activo)values(" + pkmn.Numero + ", '" + pkmn.Nombre + "', '"+ pkmn.Descripcion+"' ,1)");
+                accesoDatos.executeAction();
+            }catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                accesoDatos.closeConnection();
+            }
         }
     }
 }
