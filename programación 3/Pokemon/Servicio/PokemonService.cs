@@ -38,8 +38,8 @@ namespace Servicio
                     aux.Nombre = (string)reader["Nombre"];
                     aux.Descripcion = (string)reader["Descripcion"];
                     aux.urlImagen = (string)reader["UrlImagen"];
-                    aux.Tipo = (string)reader["Tipo"];
-                    aux.Debilidad = (string)reader["Debilidad"];
+                    aux.Tipo.Nombre = (string)reader["Tipo"];
+                    aux.Debilidad.Nombre = (string)reader["Debilidad"];
 
                     pokemons.Add(aux);
                 }
@@ -61,7 +61,7 @@ namespace Servicio
             AccesoDatos accesoDatos = new AccesoDatos();
             try
             {
-                accesoDatos.setQuery("Insert into Pokemons (Numero,Nombre,Descripcion,Activo)values(" + pkmn.Numero + ", '" + pkmn.Nombre + "', '"+ pkmn.Descripcion+"' ,1)");
+                accesoDatos.setQuery("Insert into Pokemons (Numero,Nombre,Descripcion,idTipo,idDebilidad,Activo)values(" + pkmn.Numero + ", '" + pkmn.Nombre + "', '"+ pkmn.Descripcion+"' , "+pkmn.Tipo.Id+" , "+pkmn.Debilidad.Id+" ,1)");
                 accesoDatos.executeAction();
             }catch(Exception ex)
             {

@@ -36,6 +36,10 @@
             this.txbDesc = new System.Windows.Forms.RichTextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.lblTipo = new System.Windows.Forms.Label();
+            this.cmbTipo = new System.Windows.Forms.ComboBox();
+            this.cmbDebilidad = new System.Windows.Forms.ComboBox();
+            this.lblDebilidad = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblNumero
@@ -84,7 +88,7 @@
             // 
             this.txbDesc.Location = new System.Drawing.Point(68, 101);
             this.txbDesc.Name = "txbDesc";
-            this.txbDesc.Size = new System.Drawing.Size(180, 96);
+            this.txbDesc.Size = new System.Drawing.Size(180, 44);
             this.txbDesc.TabIndex = 5;
             this.txbDesc.Text = "";
             // 
@@ -106,12 +110,53 @@
             this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // lblTipo
+            // 
+            this.lblTipo.AutoSize = true;
+            this.lblTipo.Location = new System.Drawing.Point(34, 160);
+            this.lblTipo.Name = "lblTipo";
+            this.lblTipo.Size = new System.Drawing.Size(28, 13);
+            this.lblTipo.TabIndex = 8;
+            this.lblTipo.Text = "Tipo";
+            // 
+            // cmbTipo
+            // 
+            this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipo.FormattingEnabled = true;
+            this.cmbTipo.Location = new System.Drawing.Point(68, 155);
+            this.cmbTipo.Name = "cmbTipo";
+            this.cmbTipo.Size = new System.Drawing.Size(180, 21);
+            this.cmbTipo.TabIndex = 9;
+            // 
+            // cmbDebilidad
+            // 
+            this.cmbDebilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDebilidad.FormattingEnabled = true;
+            this.cmbDebilidad.Location = new System.Drawing.Point(68, 192);
+            this.cmbDebilidad.Name = "cmbDebilidad";
+            this.cmbDebilidad.Size = new System.Drawing.Size(180, 21);
+            this.cmbDebilidad.TabIndex = 11;
+            // 
+            // lblDebilidad
+            // 
+            this.lblDebilidad.AutoSize = true;
+            this.lblDebilidad.Location = new System.Drawing.Point(14, 197);
+            this.lblDebilidad.Name = "lblDebilidad";
+            this.lblDebilidad.Size = new System.Drawing.Size(51, 13);
+            this.lblDebilidad.TabIndex = 10;
+            this.lblDebilidad.Text = "Debilidad";
             // 
             // frmAddPokemon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 349);
+            this.Controls.Add(this.cmbDebilidad);
+            this.Controls.Add(this.lblDebilidad);
+            this.Controls.Add(this.cmbTipo);
+            this.Controls.Add(this.lblTipo);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txbDesc);
@@ -139,5 +184,9 @@
         private System.Windows.Forms.RichTextBox txbDesc;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label lblTipo;
+        private System.Windows.Forms.ComboBox cmbTipo;
+        private System.Windows.Forms.ComboBox cmbDebilidad;
+        private System.Windows.Forms.Label lblDebilidad;
     }
 }

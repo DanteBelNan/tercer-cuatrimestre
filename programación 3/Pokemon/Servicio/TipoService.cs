@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,6 +36,25 @@ namespace Servicio
                 data.closeConnection();
             }
             return Types;
+        }
+
+        public int getId(string nombre)
+        {
+            try
+            {
+                data.setQuery("SELECT Id FROM TIPOS Where Nombre = '"+nombre+"'");
+                data.executeQuery();
+                int id = 0;
+                while (data.Reader.Read())
+                {
+                    id = (int)data.Reader["Id"];
+                }
+                return id;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }finally { data.closeConnection(); }
         }
     }
 }
