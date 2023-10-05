@@ -29,6 +29,8 @@ namespace Pokemon
                 cmbDebilidad.Items.Add(tipo.Nombre);
                 cmbTipo.Items.Add(tipo.Nombre);
             }
+
+            pbxPokemon.Load("https://imgs.search.brave.com/FgYR2pvWy0QGmcFY_FjYDMtY9__j8lVBktoYCfYm830/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zbWFs/bGltZy5wbmdrZXku/Y29tL3BuZy9zbWFs/bC8xOC0xODIwMjlf/b3Blbi1wb2tlYmFs/bC1wbmctcG9rZW1v/bi1iYWxsLW9wZW4t/cG5nLnBuZw");
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -41,6 +43,7 @@ namespace Pokemon
                 pokemon.Numero = int.Parse(txbNumero.Text);
                 pokemon.Nombre = txbNombre.Text;
                 pokemon.Descripcion = txbDesc.Text;
+                pokemon.urlImagen = txbImagen.Text;
                 pokemon.Tipo.Nombre = cmbTipo.Text;
                 pokemon.Tipo.Id = tipoService.getId(pokemon.Tipo.Nombre);
                 pokemon.Debilidad.Nombre = cmbDebilidad.Text;
@@ -54,11 +57,26 @@ namespace Pokemon
             {
                 MessageBox.Show(ex.ToString());
             }
+            finally
+            {
+                this.Close();
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                pbxPokemon.Load(txbImagen.Text);
+            }catch(Exception ex)
+            {
+                pbxPokemon.Load("https://imgs.search.brave.com/FgYR2pvWy0QGmcFY_FjYDMtY9__j8lVBktoYCfYm830/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zbWFs/bGltZy5wbmdrZXku/Y29tL3BuZy9zbWFs/bC8xOC0xODIwMjlf/b3Blbi1wb2tlYmFs/bC1wbmctcG9rZW1v/bi1iYWxsLW9wZW4t/cG5nLnBuZw");
+            }
         }
     }
 }
