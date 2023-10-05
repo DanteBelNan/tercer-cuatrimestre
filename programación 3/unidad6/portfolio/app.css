@@ -11,6 +11,7 @@ header{
     text-align: center;
     display: flex;
     height: 300px;
+    margin-bottom: 5%;
 }
 
 header .title{
@@ -64,3 +65,95 @@ header .extra-information a img:hover{
 .shown{
     max-width: 100%;
 }
+
+
+main{
+    display: inline-flex;
+    color: black;
+    width: 100%;
+    font-size: 21px;
+    margin-bottom: 5%;
+}
+
+main section{
+    margin-right: 4%;
+    min-width: 60%;
+    background-color: aliceblue;
+    border-radius: 24px;
+    text-align: center;
+}
+
+main section .proyectos{
+    display: flex;
+}
+
+main section .proyecto{
+    margin: 25px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 160px;
+}
+
+main section .proyecto img{
+    width: 100px;
+    border-radius: 15px;
+}
+
+
+
+main aside{
+    margin-left: 4%;
+    min-width: 30%;
+    background-color: aliceblue;
+    border-radius: 24px;
+    text-align: center;
+}
+
+main aside ul{
+    text-align: left;
+    font-size: 11px;
+}
+
+
+footer{
+    color: black;
+    width: 100%;
+    font-size: 21px;
+    background-color: aliceblue;
+    border-radius: 50px;
+    text-align: center;
+}
+
+
+
+footer .campo{
+    margin: 25px;
+    display: flex;
+    width: 90%;
+}
+
+footer .campo input{
+    height: 25px;
+    align-self: center;
+    font-size: 25px;
+    margin-left: 15px;
+    width: 80%;
+}
+
+footer .campo textarea{
+    resize: none;
+    height: 120px;
+    align-self: center;
+    font-size: 25px;
+    margin-left: 15px;
+    width: 80%;
+}
+
+footer button{
+    margin: 25px;
+    width: 85px;
+    height: 35px;
+    border-radius: 50px;
+    
+}
+
