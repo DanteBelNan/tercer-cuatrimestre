@@ -144,7 +144,7 @@ footer .campo textarea{
     resize: none;
     height: 120px;
     align-self: center;
-    font-size: 25px;
+    font-size: 15px;
     margin-left: 15px;
     width: 80%;
 }
@@ -154,6 +154,6 @@ footer button{
     width: 85px;
     height: 35px;
     border-radius: 50px;
-    
+
 }
 
