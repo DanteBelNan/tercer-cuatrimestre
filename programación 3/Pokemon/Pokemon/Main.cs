@@ -72,5 +72,14 @@ namespace Pokemon
             frmAddPokemon.ShowDialog();
             loadPokemons();
         }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            Pkmn selected;
+            selected = (Pkmn)dgvPokemons.CurrentRow.DataBoundItem;
+            frmAddPokemon frmAddPokemon = new frmAddPokemon(selected);
+            frmAddPokemon.ShowDialog();
+            loadPokemons();
+        }
     }
 }
