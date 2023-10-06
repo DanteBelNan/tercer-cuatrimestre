@@ -56,5 +56,19 @@ namespace Servicio
                 throw ex;
             }finally { data.closeConnection(); }
         }
+
+        public void addType(string nombre)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setQuery("Inser into Tipos (Nombre) Values @Nombre");
+                datos.setParam("Nombre", nombre);
+            }catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally { datos.closeConnection(); }
+        }
     }
 }

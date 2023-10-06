@@ -65,5 +65,10 @@ namespace Models
             }
             connection.Close();
         }
+
+        public void setParam(string paramName, object paramValue)
+        {
+            command.Parameters.AddWithValue("@" + paramName, paramValue);
+        }
     }
 }
