@@ -23,7 +23,6 @@ namespace Pokemon
         private void Main_Load(object sender, EventArgs e)
         {
             loadPokemons();
-            
         }
 
         private void loadPokemons()
@@ -35,6 +34,7 @@ namespace Pokemon
                 list = PokemonService.getAllPokemons();
 
                 dgvPokemons.DataSource = list;
+                hideColumns();
                 cargarImagen(list[0].urlImagen);
 
             }
@@ -44,13 +44,21 @@ namespace Pokemon
             }
         }
 
-        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
+        private void hideColumns()
         {
+            dgvPokemons.Columns["Id"].Visible = false;
             dgvPokemons.Columns["UrlImagen"].Visible = false;
             dgvPokemons.Columns["Activo"].Visible = false;
             dgvPokemons.Columns["Evolucion"].Visible = false;
-            Pkmn pokemon = (Pkmn)dgvPokemons.CurrentRow.DataBoundItem;
-            cargarImagen(pokemon.urlImagen);
+        }
+
+        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dgvPokemons.CurrentRow != null)
+            {
+                Pkmn pokemon = (Pkmn)dgvPokemons.CurrentRow.DataBoundItem;
+                cargarImagen(pokemon.urlImagen);
+            }
         }
 
         private void cargarImagen(string imagen)
@@ -80,6 +88,45 @@ namespace Pokemon
             frmAddPokemon frmAddPokemon = new frmAddPokemon(selected);
             frmAddPokemon.ShowDialog();
             loadPokemons();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            PokemonService pokemonService = new PokemonService();
+            Pkmn selected;
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("Estas seguro de que lo queres eliminar?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    selected = (Pkmn)dgvPokemons.CurrentRow.DataBoundItem;
+                    pokemonService.delete(selected.Id);
+                    MessageBox.Show(selected.Nombre + " eliminado.");
+                    loadPokemons();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void filterPokemons(object sender, EventArgs e)
+        {
+            List<Pkmn> filteredList;
+            string filtro = txbFiltro.Text;
+            if (filtro.Length > 0)
+            {
+                filteredList = list.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+                dgvPokemons.DataSource = null;
+                dgvPokemons.DataSource = filteredList;
+                hideColumns();
+            }
+            else
+            {
+                loadPokemons();
+            }
         }
     }
 }

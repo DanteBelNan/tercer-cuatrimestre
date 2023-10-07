@@ -11,9 +11,9 @@ namespace Servicio
 {
     public class PokemonService
     {
+        List<Pkmn> pokemons = new List<Pkmn>();
         public List<Pkmn> getAllPokemons()
         {
-            List<Pkmn> pokemons = new List<Pkmn>();
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
             SqlDataReader reader;
@@ -100,5 +100,23 @@ namespace Servicio
                 accesoDatos.closeConnection();
             }
         }
+
+        public void delete(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setQuery("delete from pokemons where id = @id");
+                datos.setParam("Id", id);
+
+                datos.executeAction();
+            }catch(Exception ex)
+            {
+
+            }finally {
+                datos.closeConnection();
+            }
+        }
+        
     }
 }
