@@ -43,6 +43,7 @@
             this.txbImagen = new System.Windows.Forms.TextBox();
             this.lblImagen = new System.Windows.Forms.Label();
             this.pbxPokemon = new System.Windows.Forms.PictureBox();
+            this.btnAddImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,7 +157,7 @@
             // 
             this.txbImagen.Location = new System.Drawing.Point(67, 155);
             this.txbImagen.Name = "txbImagen";
-            this.txbImagen.Size = new System.Drawing.Size(180, 20);
+            this.txbImagen.Size = new System.Drawing.Size(143, 20);
             this.txbImagen.TabIndex = 13;
             this.txbImagen.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
@@ -178,11 +179,22 @@
             this.pbxPokemon.TabIndex = 14;
             this.pbxPokemon.TabStop = false;
             // 
+            // btnAddImage
+            // 
+            this.btnAddImage.Location = new System.Drawing.Point(216, 155);
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(29, 23);
+            this.btnAddImage.TabIndex = 15;
+            this.btnAddImage.Text = "+";
+            this.btnAddImage.UseVisualStyleBackColor = true;
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
+            // 
             // frmAddPokemon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 349);
+            this.Controls.Add(this.btnAddImage);
             this.Controls.Add(this.pbxPokemon);
             this.Controls.Add(this.txbImagen);
             this.Controls.Add(this.lblImagen);
@@ -225,5 +237,6 @@
         private System.Windows.Forms.TextBox txbImagen;
         private System.Windows.Forms.Label lblImagen;
         private System.Windows.Forms.PictureBox pbxPokemon;
+        private System.Windows.Forms.Button btnAddImage;
     }
 }

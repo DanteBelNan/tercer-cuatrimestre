@@ -6,7 +6,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
+using System.Configuration;
 using System.Windows.Forms;
 using Servicio;
 
@@ -15,6 +17,7 @@ namespace Pokemon
     public partial class frmAddPokemon : Form
     {
         private Pkmn pokemon = null;
+        private OpenFileDialog file = null;
         public frmAddPokemon()
         {
             InitializeComponent();
@@ -83,7 +86,13 @@ namespace Pokemon
                 pokemon.Debilidad.Nombre = cmbDebilidad.Text;
                 pokemon.Debilidad.Id = tipoService.getId(pokemon.Debilidad.Nombre);
 
-                if(pokemon.Id == 0)
+                if (file != null && !(txbImagen.Text.ToUpper().Contains("http"))) ;
+                {
+                    pokemon.urlImagen = ConfigurationManager.AppSettings["images-folder"] + file.SafeFileName;
+                    File.Copy(file.FileName, ConfigurationManager.AppSettings["images-folder"] + file.SafeFileName);
+                }
+
+                if (pokemon.Id == 0)
                 {
                     pokemonService.add(pokemon);
                     MessageBox.Show("Pokemon agregado exitosamente");
@@ -93,6 +102,7 @@ namespace Pokemon
                     pokemonService.modify(pokemon);
                     MessageBox.Show("Pokemon modificado exitosamente");
                 }
+
 
 
                 this.Close();
@@ -127,6 +137,19 @@ namespace Pokemon
         private void textBox1_Leave(object sender, EventArgs e)
         {
             cargarImagen(txbImagen.Text);
+        }
+
+        private void btnAddImage_Click(object sender, EventArgs e)
+        {
+            file = new OpenFileDialog();
+            file.Filter = "jpg|*.jpg|png|*.png";
+            if(file.ShowDialog() == DialogResult.OK)
+            {
+                txbImagen.Text = file.FileName;
+                cargarImagen(file.FileName);
+            }
+            
+
         }
     }
 }

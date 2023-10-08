@@ -31,9 +31,9 @@ namespace Pokemon
 
         private void loadPokemons()
         {
-
             try
             {
+                list.Clear();
                 list = pokemonService.getAllPokemons();
 
                 dgvPokemons.DataSource = list;
