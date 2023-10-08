@@ -15,6 +15,7 @@ namespace Pokemon
     public partial class Main : Form
     {
         private List<Pkmn> list = new List<Pkmn>();
+        PokemonService pokemonService = new PokemonService();
         public Main()
         {
             InitializeComponent();
@@ -23,15 +24,17 @@ namespace Pokemon
         private void Main_Load(object sender, EventArgs e)
         {
             loadPokemons();
+            cmbCampo.Items.Add("Número");
+            cmbCampo.Items.Add("Nombre");
+            cmbCampo.Items.Add("Descripción");
         }
 
         private void loadPokemons()
         {
-            PokemonService PokemonService = new PokemonService();
 
             try
             {
-                list = PokemonService.getAllPokemons();
+                list = pokemonService.getAllPokemons();
 
                 dgvPokemons.DataSource = list;
                 hideColumns();
@@ -92,7 +95,7 @@ namespace Pokemon
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            PokemonService pokemonService = new PokemonService();
+
             Pkmn selected;
             try
             {
@@ -128,5 +131,42 @@ namespace Pokemon
                 loadPokemons();
             }
         }
+
+        private void cmbCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbCriterio.Items.Clear();
+            string opcion = cmbCampo.SelectedItem.ToString();
+            if(opcion == "Número")
+            {
+                cmbCriterio.Items.Add("Mayor a");
+                cmbCriterio.Items.Add("Menor a");
+                cmbCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                cmbCriterio.Items.Add("Comienza con");
+                cmbCriterio.Items.Add("Termina con");
+                cmbCriterio.Items.Add("Contiene");
+            }
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string campo = cmbCampo.SelectedItem.ToString();
+                string criterio = cmbCriterio.SelectedItem.ToString();
+                string valor = txbFiltro2.Text;
+                dgvPokemons.DataSource = pokemonService.filter(campo, criterio, valor);
+                
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
     }
 }

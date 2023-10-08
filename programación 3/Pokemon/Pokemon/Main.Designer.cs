@@ -35,6 +35,13 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.txbFiltro = new System.Windows.Forms.TextBox();
+            this.lblCampo = new System.Windows.Forms.Label();
+            this.cmbCampo = new System.Windows.Forms.ComboBox();
+            this.cmbCriterio = new System.Windows.Forms.ComboBox();
+            this.lblCriterio = new System.Windows.Forms.Label();
+            this.lblFiltro2 = new System.Windows.Forms.Label();
+            this.txbFiltro2 = new System.Windows.Forms.TextBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             this.SuspendLayout();
@@ -106,11 +113,81 @@
             this.txbFiltro.TabIndex = 6;
             this.txbFiltro.TextChanged += new System.EventHandler(this.filterPokemons);
             // 
+            // lblCampo
+            // 
+            this.lblCampo.AutoSize = true;
+            this.lblCampo.Location = new System.Drawing.Point(52, 396);
+            this.lblCampo.Name = "lblCampo";
+            this.lblCampo.Size = new System.Drawing.Size(40, 13);
+            this.lblCampo.TabIndex = 7;
+            this.lblCampo.Text = "Campo";
+            // 
+            // cmbCampo
+            // 
+            this.cmbCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCampo.FormattingEnabled = true;
+            this.cmbCampo.Location = new System.Drawing.Point(98, 392);
+            this.cmbCampo.Name = "cmbCampo";
+            this.cmbCampo.Size = new System.Drawing.Size(121, 21);
+            this.cmbCampo.TabIndex = 8;
+            this.cmbCampo.SelectedIndexChanged += new System.EventHandler(this.cmbCampo_SelectedIndexChanged);
+            // 
+            // cmbCriterio
+            // 
+            this.cmbCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCriterio.FormattingEnabled = true;
+            this.cmbCriterio.Location = new System.Drawing.Point(276, 393);
+            this.cmbCriterio.Name = "cmbCriterio";
+            this.cmbCriterio.Size = new System.Drawing.Size(121, 21);
+            this.cmbCriterio.TabIndex = 10;
+            // 
+            // lblCriterio
+            // 
+            this.lblCriterio.AutoSize = true;
+            this.lblCriterio.Location = new System.Drawing.Point(230, 397);
+            this.lblCriterio.Name = "lblCriterio";
+            this.lblCriterio.Size = new System.Drawing.Size(39, 13);
+            this.lblCriterio.TabIndex = 9;
+            this.lblCriterio.Text = "Criterio";
+            // 
+            // lblFiltro2
+            // 
+            this.lblFiltro2.AutoSize = true;
+            this.lblFiltro2.Location = new System.Drawing.Point(408, 396);
+            this.lblFiltro2.Name = "lblFiltro2";
+            this.lblFiltro2.Size = new System.Drawing.Size(29, 13);
+            this.lblFiltro2.TabIndex = 11;
+            this.lblFiltro2.Text = "Filtro";
+            // 
+            // txbFiltro2
+            // 
+            this.txbFiltro2.Location = new System.Drawing.Point(454, 392);
+            this.txbFiltro2.Name = "txbFiltro2";
+            this.txbFiltro2.Size = new System.Drawing.Size(100, 20);
+            this.txbFiltro2.TabIndex = 12;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(560, 391);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 13;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 376);
+            this.ClientSize = new System.Drawing.Size(800, 426);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.txbFiltro2);
+            this.Controls.Add(this.lblFiltro2);
+            this.Controls.Add(this.cmbCriterio);
+            this.Controls.Add(this.lblCriterio);
+            this.Controls.Add(this.cmbCampo);
+            this.Controls.Add(this.lblCampo);
             this.Controls.Add(this.txbFiltro);
             this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.btnDelete);
@@ -137,6 +214,13 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.TextBox txbFiltro;
+        private System.Windows.Forms.Label lblCampo;
+        private System.Windows.Forms.ComboBox cmbCampo;
+        private System.Windows.Forms.ComboBox cmbCriterio;
+        private System.Windows.Forms.Label lblCriterio;
+        private System.Windows.Forms.Label lblFiltro2;
+        private System.Windows.Forms.TextBox txbFiltro2;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }
 

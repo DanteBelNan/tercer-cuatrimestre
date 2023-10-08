@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Net;
 using Models;
+using System.Linq.Expressions;
+using System.Runtime.Remoting.Messaging;
 
 namespace Servicio
 {
@@ -115,6 +117,95 @@ namespace Servicio
 
             }finally {
                 datos.closeConnection();
+            }
+        }
+
+        public List<Pkmn> filter(string campo,string criterio, string valor)
+        {
+            List<Pkmn> list = new List<Pkmn>();
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            try {
+                string query = "SELECT P.Id, P.Numero, P.Nombre, P.Descripcion, ISNULL(P.UrlImagen,'') as UrlImagen, ISNULL(T.Nombre, 'Sin Tipo') as Tipo, ISNULL(D.Nombre, 'Sin Debilidad') as Debilidad, P.idTipo, P.idDebilidad " +
+                    "FROM Pokemons as P " +
+                    "LEFT JOIN Tipos as T ON T.id = P.idTipo " +
+                    "LEFT JOIN Tipos as D ON D.id = P.idDebilidad " +
+                    "WHERE ";
+            
+                if (campo == "Número")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            query += "P.Numero > " + valor;
+                            break;
+                        case "Menor a":
+                            query += "P.Numero < " + valor;
+                            break;
+                        case "Igual a":
+                            query += "P.Numero = " + valor;
+                            break;
+                    }
+                }
+                else if(campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            query += "P.Nombre like  '" + valor + "%'";
+                            break;
+                        case "Termina con":
+                            query += "P.Nombre like  '%" + valor + "'";
+                            break;
+                        case "Contiene":
+                            query += "P.Nombre like '%" + valor + "%'";
+                            break;
+                    }
+                }
+                else if(campo == "Descripción")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            query += "P.Descripcion like  '" + valor + "%'";
+                            break;
+                        case "Termina con":
+                            query += "P.Descripcion like  '%" + valor + "'";
+                            break;
+                        case "Contiene":
+                            query += "P.Descripcion like '%" + valor + "%'";
+                            break;
+                    }
+                }
+
+                query += " ORDER BY P.Numero ASC";
+                accesoDatos.setQuery(query);
+                accesoDatos.executeQuery();
+
+                while (accesoDatos.Reader.Read())
+                {
+                    Pkmn aux = new Pkmn();
+                    aux.Id = (int)accesoDatos.Reader["Id"];
+                    aux.Numero = (int)accesoDatos.Reader["Numero"];
+                    aux.Nombre = (string)accesoDatos.Reader["Nombre"];
+                    aux.Descripcion = (string)accesoDatos.Reader["Descripcion"];
+                    aux.urlImagen = (string)accesoDatos.Reader["UrlImagen"];
+                    aux.Tipo.Id = (int)accesoDatos.Reader["IdTipo"];
+                    aux.Tipo.Nombre = (string)accesoDatos.Reader["Tipo"];
+                    aux.Debilidad.Id = (int)accesoDatos.Reader["IdDebilidad"];
+                    aux.Debilidad.Nombre = (string)accesoDatos.Reader["Debilidad"];
+
+                    list.Add(aux);
+                }
+                //throw new Exception(query);
+                return list;
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.closeConnection();
             }
         }
         
