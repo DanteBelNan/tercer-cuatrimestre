@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Servicio;
+using System.Runtime.Remoting.Messaging;
 
 namespace Pokemon
 {
@@ -155,6 +156,10 @@ namespace Pokemon
         {
             try
             {
+                if (!validateFilters())
+                {
+                    return;
+                }
                 string campo = cmbCampo.SelectedItem.ToString();
                 string criterio = cmbCriterio.SelectedItem.ToString();
                 string valor = txbFiltro2.Text;
@@ -166,6 +171,46 @@ namespace Pokemon
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private bool validateFilters()
+        {
+            if(cmbCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("No hay un campo seleccionado");
+                return false;
+            }
+            if(cmbCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("No hay un criterio seleccionado");
+                return false;
+            }
+            if (cmbCampo.Text == "Número")
+            {
+                if (!onlyNumbers(txbFiltro2.Text))
+                {
+                    MessageBox.Show("No hay ningun numero");
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        private bool onlyNumbers(string chain)
+        {
+            if (string.IsNullOrEmpty(chain))
+            {
+                return false;
+            }
+            foreach (char  c in chain)
+            {
+                if (!(char.IsNumber(c)))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
     }
