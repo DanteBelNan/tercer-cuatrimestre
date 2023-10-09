@@ -11,7 +11,7 @@ namespace ejemplo1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Title = "ACA HAY UN TITULO";
         }
     }
 }
