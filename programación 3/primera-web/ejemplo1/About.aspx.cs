@@ -13,5 +13,17 @@ namespace ejemplo1
         {
             Title = "ACA HAY UN TITULO";
         }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            string nombre = txbNombre.Text;
+            lblSaludo.Text = nombre;
+        }
+
+        protected void btnAceptar_Click1(object sender, EventArgs e)
+        {
+            lblSaludo.Text = "Hola " + txbNombre.Text;
+            Response.Redirect("Default.aspx");
+        }
     }
 }
