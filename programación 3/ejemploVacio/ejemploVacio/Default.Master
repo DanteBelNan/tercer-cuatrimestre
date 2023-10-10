@@ -53,11 +53,11 @@
             </div>
         </nav>
 
-        <div>
+        <div class="container">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-            <footer>Data en el footer</footer>
         </div>
+        <footer>Data en el footer</footer>
     </form>
 </body>
 </html>
