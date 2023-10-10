@@ -15,6 +15,7 @@ namespace ejemplo1
             if(txbNombre == null)
             {
                 txbNombre = new TextBox();
+                txbPassword = new TextBox();
             }
             if (!IsPostBack)
             {
@@ -33,7 +34,13 @@ namespace ejemplo1
         protected void btnAceptar_Click1(object sender, EventArgs e)
         {
             lblSaludo.Text = "Hola " + txbNombre.Text;
-            //Response.Redirect("Default.aspx");
+            string nombre = txbNombre.Text;
+            string password = txbPassword.Text;
+
+            Session.Add("user", nombre);
+            Session.Add("pass", password);
+            //Response.Redirect("Default.aspx?nombre="+txbNombre.Text+"&pass="+txbPassword.Text, false);
+            Response.Redirect("Default.aspx", false);
         }
 
         protected void txbNombre_TextChanged(object sender, EventArgs e)
