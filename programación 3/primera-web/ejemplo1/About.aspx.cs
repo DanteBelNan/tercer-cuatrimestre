@@ -12,6 +12,16 @@ namespace ejemplo1
         protected void Page_Load(object sender, EventArgs e)
         {
             Title = "ACA HAY UN TITULO";
+            if(txbNombre == null)
+            {
+                txbNombre = new TextBox();
+            }
+            if (!IsPostBack)
+            {
+                txbNombre.Text = "test";
+            }
+            
+            
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -23,7 +33,12 @@ namespace ejemplo1
         protected void btnAceptar_Click1(object sender, EventArgs e)
         {
             lblSaludo.Text = "Hola " + txbNombre.Text;
-            Response.Redirect("Default.aspx");
+            //Response.Redirect("Default.aspx");
+        }
+
+        protected void txbNombre_TextChanged(object sender, EventArgs e)
+        {
+            lblSecundario.Text += txbNombre.Text;
         }
     }
 }
