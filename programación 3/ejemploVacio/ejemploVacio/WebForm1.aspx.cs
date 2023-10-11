@@ -12,9 +12,23 @@ namespace ejemploVacio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            PokemonService pokemonService = new PokemonService();
-            dgvPokemones.DataSource = pokemonService.listar();
+            if(Session["listaPokemons"] == null)
+            {
+              PokemonService pokemonService = new PokemonService();
+                Session.Add("listaPokemons", pokemonService.listar());
+
+            }
+            dgvPokemones.DataSource = Session["listaPokemons"];
             dgvPokemones.DataBind();
+        }
+
+        protected void dgvPokemones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(dgvPokemones.SelectedRow != null && IsPostBack)
+            {
+                var test = dgvPokemones.SelectedRow.Cells[0].Text;
+
+            }
         }
     }
 }

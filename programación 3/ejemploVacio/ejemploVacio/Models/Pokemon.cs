@@ -10,6 +10,7 @@ namespace ejemploVacio.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Tipo { get; set; }
         public DateTime Captura { get; set; }
         public bool esShiny {  get; set; }
     }
@@ -24,6 +25,7 @@ namespace ejemploVacio.Models
             p.Id = 1;
             p.Name = "Bulbasaur";
             p.Description = "Rana de planta";
+            p.Tipo = "Planta";
             p.Captura = DateTime.Now;
             p.esShiny = false;
 
@@ -33,6 +35,7 @@ namespace ejemploVacio.Models
             pokemon.Id = 26;
             pokemon.Name = "Pikachu";
             pokemon.Description = "Rata de electricidad";
+            pokemon.Tipo = "Electrico";
             pokemon.Captura = DateTime.Now;
             pokemon.esShiny = true;
 
