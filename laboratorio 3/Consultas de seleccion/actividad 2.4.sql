@@ -29,6 +29,14 @@ WHERE T.limiteCompra > ANY (
 ) 
 
 --4 Los apellidos y nombres y alias de las billeteras que no hayan registrado movimientos en la segunda quincena de Agosto de 2023.
+SELECT BV.apellido, BV.nombre, BV.alias
+FROM BilleteraVirtual as BV
+WHERE
+    bv.idBilleteraVirtual not in (
+        SELECT M.emisor
+        FROM Movimientos as M
+        WHERE fecha >= '2023-08-16' AND fecha <= '2023-08-31'
+    )
 
 --5 Los apellidos y nombres de clientes que no tengan registrada ninguna tarjeta de la marca 'Zelev'
 
