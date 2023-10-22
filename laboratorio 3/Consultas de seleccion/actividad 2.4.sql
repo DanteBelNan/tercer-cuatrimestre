@@ -81,14 +81,51 @@ SELECT M.nombre AS Nombre_Marca,
            INNER JOIN BilleteraVirtual BV ON U.id = BV.idPersona
            INNER JOIN BilleteraVirtualXTarjeta BVXT ON BV.idBilleteraVirtual = BVXT.idBilletera
            INNER JOIN Tarjeta T ON BVXT.idTarjeta = T.id
-           WHERE T.idMarca = M.id AND U.situacion_crediticia > 3
+           WHERE T.idMarca = M.id AND U.situacion_crediticia <= 3
        ) AS Cantidad_Clientes_Desfavortable
 FROM Marca M;
 
---8 Por cada billetera, listar el alias y la cantidad total de dinero operado en el mes de agosto de 2023 y la cantidad total de dinero operado en el mes de septiembre de 2023. Si no registró movimientos debe totalizar 0.
+--8 Por cada billetera, listar el alias y la cantidad total de dinero operado en el mes de enero de 2023. Si no registró movimientos debe totalizar 0.
+SELECT BV.alias, COALESCE((
+    SELECT SUM(M.monto)
+    FROM Movimientos as M
+    WHERE M.emisor = BV.idBilleteraVirtual AND MONTH(M.fecha) = 1 AND YEAR(m.fecha) = 2023),
+    0) as total
+FROM BilleteraVirtual as BV
 
---9 El banco decidió cobrar en el mes de Agosto el monto de $50 a cada movimiento de débito realizado en un fin de semana y $10 a los movimientos de crédito realizados. Listar para cada billetera, el alias y la cantidad a abonar por este disparatado recargo. Si no registra recargos debe totalizar 0.
---NOTA: Sólo aplica a los movimientos registrados en el mes de Agosto de 2023.
+
+--9 El banco decidió cobrar en el mes de enero el monto de $50 a cada movimiento de débito realizado en un fin de semana y $10 a los movimientos de crédito realizados. Listar para cada billetera, el alias y la cantidad a abonar por este disparatado recargo. Si no registra recargos debe totalizar 0.
+--NOTA: Sólo aplica a los movimientos registrados en el mes de enero de 2023.
+SELECT BV.alias, COALESCE(
+    (SELECT SUM(
+        CASE
+            WHEN MONTH(M.Fecha) = 1 AND YEAR(M.fecha) = 2023 THEN
+                CASE
+                    WHEN DATENAME(dw, M.fecha) IN ('Saturday', 'Sunday') AND M.monto < 0 THEN 50
+                    WHEN M.monto > 0 THEN 10
+                    ELSE 0
+                END
+            ELSE 0
+    END)
+    FROM Movimientos as M
+    Where M.emisor = BV.idBilleteraVirtual),
+    0) as Total_Recargos
+FROM BilleteraVirtual as BV
+
 
 --10 El total acumulado en concepto de recargo (ver Punto 9)
+SELECT COALESCE(SUM(
+    (SELECT SUM(
+        CASE
+            WHEN MONTH(M.fecha) = 8 AND YEAR(M.fecha) = 2023 THEN
+                CASE
+                    WHEN DATENAME(dw, M.fecha) IN ('Saturday', 'Sunday') AND M.monto < 0 THEN 50
+                    WHEN M.monto > 0 THEN 10
+                    ELSE 0
+                END
+            ELSE 0
+        END)
+    FROM Movimientos AS M
+    WHERE M.emisor = BV.idBilleteraVirtual)
+))
 
