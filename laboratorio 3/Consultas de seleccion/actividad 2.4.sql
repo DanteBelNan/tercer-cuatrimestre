@@ -114,18 +114,16 @@ FROM BilleteraVirtual as BV
 
 
 --10 El total acumulado en concepto de recargo (ver Punto 9)
-SELECT COALESCE(SUM(
-    (SELECT SUM(
-        CASE
-            WHEN MONTH(M.fecha) = 8 AND YEAR(M.fecha) = 2023 THEN
-                CASE
-                    WHEN DATENAME(dw, M.fecha) IN ('Saturday', 'Sunday') AND M.monto < 0 THEN 50
-                    WHEN M.monto > 0 THEN 10
-                    ELSE 0
-                END
-            ELSE 0
-        END)
-    FROM Movimientos AS M
-    WHERE M.emisor = BV.idBilleteraVirtual)
-))
+SELECT SUM(
+    CASE
+        WHEN MONTH(M.fecha) = 1 AND YEAR(M.fecha) = 2023 THEN
+            CASE
+                WHEN DATENAME(dw, M.fecha) IN ('Saturday', 'Sunday') AND M.monto < 0 THEN 50
+                WHEN M.monto > 0 THEN 10
+                ELSE 0
+            END
+        ELSE 0
+    END) AS Total_Acumulado_Recargos
+FROM Movimientos AS M
+INNER JOIN BilleteraVirtual AS BV ON M.emisor = BV.idBilleteraVirtual;
 
