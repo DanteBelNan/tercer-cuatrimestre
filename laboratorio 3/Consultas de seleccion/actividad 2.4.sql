@@ -41,13 +41,49 @@ WHERE
 --5 Los apellidos y nombres de clientes que no tengan registrada ninguna tarjeta de la marca 'LEMON'
 SELECT DISTINCT u.apellido, u.nombre
 FROM usuarios as u
-
-
+WHERE u.id NOT IN (
+    SELECT DISTINCT u.id
+    FROM usuarios as u
+    INNER JOIN BilleteraVirtual as BV on BV.idPersona = u.id
+    INNER JOIN BilleteraVirtualXTarjeta as BVXT on BVXT.idBilletera = bv.idPersona
+    INNER JOIN Tarjeta as T on T.id = BVXT.idTarjeta
+    INNER JOIN Marca as M on M.nombre = T.idMarca
+    WHERE m.nombre = 'LEMON'
+)
 
 
 --6 Los nombres de bancos que no hayan entregado tarjetas a ningún cliente con nivel de situación crediticia Mala, Muy Mala o No Confiable.
+SELECT B.nombre
+FROM Banco as B
+WHERE B.id NOT IN (
+    SELECT T.idBanco
+    FROM Tarjeta AS T
+    INNER JOIN BilleteraVirtualXTarjeta BVXT ON BVXT.idTarjeta = T.id
+    INNER JOIN BilleteraVirtual AS BV on BV.idBilleteraVirtual = BVXT.idBilletera
+    INNER JOIN USUARIOS as U on U.id = BV.idPersona
+    WHERE U.situacion_crediticia <= 3
+)
+
 
 --7 Por cada marca de tarjeta listar el nombre, la cantidad de clientes con situación crediticia favorable (de Excelente a Buena) y situación crediticia desfavorable (de Regular a No Confiable)
+SELECT M.nombre AS Nombre_Marca, 
+       (
+           SELECT COUNT(*)
+           FROM usuarios U
+           INNER JOIN BilleteraVirtual BV ON U.id = BV.idPersona
+           INNER JOIN BilleteraVirtualXTarjeta BVXT ON BV.idBilleteraVirtual = BVXT.idBilletera
+           INNER JOIN Tarjeta T ON BVXT.idTarjeta = T.id
+           WHERE T.idMarca = M.id AND U.situacion_crediticia > 3
+       ) AS Cantidad_Clientes_Favorable,
+              (
+           SELECT COUNT(*)
+           FROM usuarios U
+           INNER JOIN BilleteraVirtual BV ON U.id = BV.idPersona
+           INNER JOIN BilleteraVirtualXTarjeta BVXT ON BV.idBilleteraVirtual = BVXT.idBilletera
+           INNER JOIN Tarjeta T ON BVXT.idTarjeta = T.id
+           WHERE T.idMarca = M.id AND U.situacion_crediticia > 3
+       ) AS Cantidad_Clientes_Desfavortable
+FROM Marca M;
 
 --8 Por cada billetera, listar el alias y la cantidad total de dinero operado en el mes de agosto de 2023 y la cantidad total de dinero operado en el mes de septiembre de 2023. Si no registró movimientos debe totalizar 0.
 
