@@ -39,15 +39,10 @@ WHERE
     )
 
 --5 Los apellidos y nombres de clientes que no tengan registrada ninguna tarjeta de la marca 'LEMON'
-SELECT BV.apellido, BV.nombre
-FROM BilleteraVirtual as BV
-WHERE bv.idPersona NOT IN (
-    SELECT idPersona
-    FROM BilleteraVirtualXTarjeta as BVXT
-    INNER JOIN Tarjeta as T on BVXT.idTarjeta = T.id
-    INNER JOIN Marca as M on T.idMarca = M.id
-    WHERE M.nombre LIKE 'LEMON'
-)
+SELECT DISTINCT u.apellido, u.nombre
+FROM usuarios as u
+
+
 
 
 --6 Los nombres de bancos que no hayan entregado tarjetas a ningún cliente con nivel de situación crediticia Mala, Muy Mala o No Confiable.
