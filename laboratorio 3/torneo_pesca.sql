@@ -80,4 +80,36 @@ INSERT INTO CAPTURAS (IDCAPTURA,IDPARTICIPANTE,IDESPECIE,PESO,FECHA_HORA) VALUES
 	 (12,4,1,15.00,'2023-04-01 21:15:00.0');
 
 
-     
+-- 1 El trofeo de oro del torneo es para aquel que haya capturado el pez más pesado entre todos los peces. Puede haber más de un ganador del trofeo. Listar Apellido y nombre, especie de pez que capturó y el pesaje del mismo.
+SELECT P.APELLIDO, P.NOMBRE, E.ESPECIE, C.PESO
+FROM PARTICIPANTES as P
+LEFT JOIN CAPTURAS as C ON P.IDPARTICIPANTE = C.IDPARTICIPANTE
+LEFT JOIN ESPECIES as E ON E.IDESPECIE = C.IDESPECIE
+WHERE C.PESO = (SELECT MAX(PESO) FROM CAPTURAS)
+
+
+-- 2 Listar todos los participantes que no hayan pescado ningún tipo de bagre.
+SELECT DISTINCT P.APELLIDO, P.NOMBRE
+FROM PARTICIPANTES AS P
+WHERE P.IDPARTICIPANTE NOT IN (
+	SELECT C.IDPARTICIPANTE
+	FROM CAPTURAS AS C
+	INNER JOIN ESPECIES AS E ON C.IDESPECIE = E.IDESPECIE
+	WHERE E.ESPECIE LIKE 'BAGRE%'
+)
+
+-- 3 Listar los participantes cuyo promedio de pesca (en kilos) sea mayor a 30. Listar apellido, nombre y promedio de kilos. 
+SELECT P.NOMBRE, P.APELLIDO, AVG(C.PESO) AS PromedioDeKilos
+FROM PARTICIPANTES AS P
+LEFT JOIN CAPTURAS AS C ON C.IDPARTICIPANTE = P.IDPARTICIPANTE
+LEFT JOIN ESPECIES AS E ON E.IDESPECIE = C.IDESPECIE
+GROUP BY P.IDPARTICIPANTE, P.NOMBRE, P.APELLIDO
+HAVING AVG(C.PESO) > 30;
+
+-- 4 Por cada especie, listar la cantidad de participantes que la han capturado.
+SELECT E.ESPECIE, COUNT(DISTINCT C.IDPARTICIPANTE) AS CantidadDeParticipantes
+FROM ESPECIES AS E
+LEFT JOIN CAPTURAS AS C ON E.IDESPECIE = C.IDESPECIE
+GROUP BY E.ESPECIE
+
+-- 5 Listar apellido y nombre del participante y nombre de la especie de cada pez que haya capturado el pescador/a. Si alguna especie de pez no ha sido pescado nunca entonces deberá aparecer en el listado de todas formas pero sin relacionarse con ningún pescador. El listado debe aparecer ordenado por nombre de especie de manera creciente. La combinación apellido y nombre y nombre de la especie debe aparecer sólo una vez este listado.
