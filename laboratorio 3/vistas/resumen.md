@@ -13,3 +13,10 @@ una cantidad N de tablas, estas pueden recurrir a una vista, que nos devolvera u
 Mediante el uso de la vista lo que conseguimos es abstraer la complejidad, ya que al momento de elaborar los reportes se solicitarán los datos directamente de nuestra vista sin preocuparnos por el calculo de las columnas, por otra parte, si en alguna emperesa, se decidiera modificar algun tipo de calculo, solo necesitamos modificar la vista para que quede actualizado el proceso.
 
 2- Denormalizar datos
+Si bien la estructura de nuestra base de datos permanece normalizada, al momento de utilizar vistas, no sera necesario que estas se encuentren normalizadas, por ejemplo, podria obtener el apellido, nombre, edad, domicilio y ciudad de residencia, nombre de la obra social y cantidad de ventas realizadas de un empleado. Este conjunto de datos proviene de diversas tablas que se encontrarán relacionadas mediante claves. Algunas de las columnas de la vista provienen de estas tablas y otras provienen de conexiones entre tablas.
+Quien utilice la vista no debera preocuparse por recorrer las conexiones o realizar los calculos.
+
+3- Aplicar filtros:
+Como las vistas permiten que se les realicen consultas de SELECT. se pueden utilizar las mismas clausulas que se utilizan en las consultas de selección tradicionales conmo ordenamientos y filtros
+De esta manera, las vistas se transforman en una herramienta muy poderosa.
+
