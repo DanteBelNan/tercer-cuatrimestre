@@ -113,3 +113,28 @@ LEFT JOIN CAPTURAS AS C ON E.IDESPECIE = C.IDESPECIE
 GROUP BY E.ESPECIE
 
 -- 5 Listar apellido y nombre del participante y nombre de la especie de cada pez que haya capturado el pescador/a. Si alguna especie de pez no ha sido pescado nunca entonces deberá aparecer en el listado de todas formas pero sin relacionarse con ningún pescador. El listado debe aparecer ordenado por nombre de especie de manera creciente. La combinación apellido y nombre y nombre de la especie debe aparecer sólo una vez este listado.
+
+
+SELECT DISTINCT P.APELLIDO, P.NOMBRE, E.ESPECIE
+FROM CAPTURAS AS C
+RIGHT JOIN PARTICIPANTES AS P ON P.IDPARTICIPANTE = C.IDPARTICIPANTE
+RIGHT JOIN ESPECIES AS E ON E.IDESPECIE = C.IDESPECIE
+ORDER BY E.ESPECIE
+
+-- 6 El trofeo de plata de la competencia se lo adjudica quien haya capturado la mayor cantidad de kilos en total y nunca haya capturado un pez por debajo del peso mínimo de la especie.
+SELECT TOP 1 P.APELLIDO, P.NOMBRE, SUM(C.PESO) AS PESO_TOTAL
+FROM PARTICIPANTES AS P
+INNER JOIN CAPTURAS AS C ON C.IDPARTICIPANTE = P.IDPARTICIPANTE
+WHERE P.IDPARTICIPANTE NOT IN (
+	SELECT P.IDPARTICIPANTE
+	FROM PARTICIPANTES AS P
+	INNER JOIN CAPTURAS AS C ON C.IDPARTICIPANTE = P.IDPARTICIPANTE
+	INNER JOIN ESPECIES AS E ON E.IDESPECIE = C.IDESPECIE
+	WHERE C.PESO < E.PESO_MINIMO
+)
+GROUP BY P.APELLIDO, P.NOMBRE
+ORDER BY PESO_TOTAL DESC;
+
+
+
+
