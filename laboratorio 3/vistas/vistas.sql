@@ -77,11 +77,110 @@ CREATE TABLE MOVIMIENTOS(
     FOREIGN KEY (idTarjeta) REFERENCES TARJETAS(idTarjeta)
 )
 
+INSERT INTO TARJETAS (apellidoUsuario, nombreUsuario, dniUsuario, altaSube, saldo, activo)
+VALUES
+('López', 'Juan', 1, '2023-10-26 08:00:00', 100.00, 1),
+('Gómez', 'María', 2, '2023-10-25 14:30:00', 50.00, 1),
+('Pérez', 'Carlos', 3, '2023-10-24 10:15:00', 75.00, 0);
+
+
+
+INSERT INTO USUARIOS (apellido, nombre, primeraSube, saldoUltSube, cantViajes, domicilio, edad, activo)
+VALUES
+('López', 'Juan', '2023-10-26 08:00:00', 100.00, 5, 'Calle A, Ciudad', 30, 1),
+('Gómez', 'María', '2023-10-25 14:30:00', 50.00, 3, 'Calle B, Ciudad', 25, 1),
+('Pérez', 'Carlos', '2023-10-24 10:15:00', 75.00, 4, 'Calle C, Ciudad', 40, 0);
+
+
+INSERT INTO COLECTIVOS (nombreEmpresa, domicilioLegal)
+VALUES
+('Empresa A', 'Calle X, Ciudad A'),
+('Empresa B', 'Calle Y, Ciudad B'),
+('Empresa C', 'Calle Z, Ciudad C');
+
+INSERT INTO VIAJES (cuandoFue, codigoLinea, idTarjeta, importe, dni)
+VALUES
+('2023-10-26 08:30:00', 1, 1, 10.00, 1),
+('2023-10-26 09:00:00', 2, 2, 5.00, 2),
+('2023-10-25 15:00:00', 3, 3, 7.50, 3);
+
+INSERT INTO MOVIMIENTOS (fecha, idTarjeta, importe, tipoMovimiento)
+VALUES
+('2023-10-26 09:30:00', 1, 5.00, 'C'),
+('2023-10-25 16:00:00', 2, 2.50, 'D'),
+('2023-10-24 11:30:00', 3, 5.00, 'C');
+
+
+
 --Realizar las siguientes vistas:
 
 -- A) Realizar una vista que permita conocer los datos de los usuarios y sus respectivas tarjetas. La misma debe contener: Apellido y nombre del usuario, número de tarjeta SUBE, estado de la tarjeta y saldo.
-CREATE VIEW vw_Usuarios_Tarjetas
-AS
-SELECT U.apellido, U.nombre, T.idTarjeta, T.activo, T.saldo
+CREATE VIEW VistaUsuariosTarjetas AS
+SELECT
+    U.apellido AS ApellidoUsuario,
+    U.nombre AS NombreUsuario,
+    T.idTarjeta AS NumeroTarjetaSUBE,
+    CASE
+        WHEN T.activo = 1 THEN 'Activa'
+        ELSE 'Inactiva'
+    END AS EstadoTarjeta,
+    T.saldo AS Saldo
 FROM USUARIOS AS U
-INNER JOIN TARJETAS ON T.dniUsuario = U.dni
+INNER JOIN TARJETAS AS T ON U.dni = T.dniUsuario;
+
+
+SELECT * FROM VistaUsuariosTarjetas
+
+
+-- B) Realizar una vista que permita conocer los datos de los usuarios y sus respectivos viajes. La misma debe contener: Apellido y nombre del usuario, número de tarjeta SUBE, fecha del viaje, importe del viaje, número de interno y nombre de la línea.
+CREATE VIEW VistaUsuariosViajes AS
+SELECT
+    U.apellido AS ApellidoUsuario,
+    U.nombre AS NombreUsuario,
+    T.idTarjeta AS NumeroTarjetaSUBE,
+    V.cuandoFue AS FechaViaje,
+    V.importe AS ImporteViaje,
+    V.codigoLinea AS NumeroInterno,
+    C.nombreEmpresa AS NombreLinea
+FROM USUARIOS AS U
+INNER JOIN TARJETAS AS T ON U.dni = T.dniUsuario
+INNER JOIN VIAJES AS V ON T.idTarjeta = V.idTarjeta
+INNER JOIN COLECTIVOS AS C ON V.codigoLinea = C.codigoLinea;
+
+
+-- C) Realizar una vista que permita conocer los datos estadísticos de cada tarjeta. La misma debe contener: Apellido y nombre del usuario, número de tarjeta SUBE, cantidad de viajes realizados, total de dinero acreditado (históricamente), cantidad de recargas, importe de recarga promedio (en pesos), estado de la tarjeta.
+
+CREATE VIEW VistaDatosTarjeta AS
+SELECT
+    T.apellidoUsuario as ApellidoUsuario,
+    T.nombreUsuario as NombreUsuario,
+    T.idTarjeta as NumeroTarjeta,
+    SELECT(
+        COUNT(T.idTarjeta) 
+        FROM Tarjetas as T 
+        INNER JOIN VIAJES as V on V.idTarjeta = T.idTarjeta
+    ) as CantViajes,
+    SELECT(SUM(V.importe)
+        FROM Viajes as V
+        INNER JOIN Tarjetas as T on T.idTarjeta = V.idTarjeta
+    ) as totalAcreditado,
+    SELECT (COUNT(T.idTarjeta)
+        FROM Tarjetas as T 
+        INNER JOIN MOVIMIENTOS as M on M.idTarjeta = T.idTarjeta
+        WHERE M.tipoMovimiento LIKE 'C'
+    ) as cantRecargas,
+    SELECT (AVG(M.importe)
+        FROM Movimientos as M 
+        INNER JOIN Tarjetas as T on M.idTarjeta = T.idTarjeta
+        WHERE M.tipoMovimiento LIKE 'C'
+    ) as cantRecargas,
+    CASE
+        WHEN T.activo = 1 THEN 'Activa'
+        ELSE 'Inactiva'
+    END AS EstadoTarjeta,
+
+FROM Tarjetas as T
+
+SELECT * FROM TARJETAS
+SELECT * FROM VIAJES
+SELECT * FROM MOVIMIENTOS
