@@ -150,37 +150,25 @@ INNER JOIN COLECTIVOS AS C ON V.codigoLinea = C.codigoLinea;
 
 -- C) Realizar una vista que permita conocer los datos estadísticos de cada tarjeta. La misma debe contener: Apellido y nombre del usuario, número de tarjeta SUBE, cantidad de viajes realizados, total de dinero acreditado (históricamente), cantidad de recargas, importe de recarga promedio (en pesos), estado de la tarjeta.
 
+-- C) Realizar una vista que permita conocer los datos estadísticos de cada tarjeta. La misma debe contener: Apellido y nombre del usuario, número de tarjeta SUBE, cantidad de viajes realizados, total de dinero acreditado (históricamente), cantidad de recargas, importe de recarga promedio (en pesos), estado de la tarjeta.
+-- C) Realizar una vista que permita conocer los datos estadísticos de cada tarjeta. La misma debe contener: Apellido y nombre del usuario, número de tarjeta SUBE, cantidad de viajes realizados, total de dinero acreditado (históricamente), cantidad de recargas, importe de recarga promedio (en pesos), estado de la tarjeta.
 CREATE VIEW VistaDatosTarjeta AS
 SELECT
-    T.apellidoUsuario as ApellidoUsuario,
-    T.nombreUsuario as NombreUsuario,
-    T.idTarjeta as NumeroTarjeta,
-    SELECT(
-        COUNT(T.idTarjeta) 
-        FROM Tarjetas as T 
-        INNER JOIN VIAJES as V on V.idTarjeta = T.idTarjeta
-    ) as CantViajes,
-    SELECT(SUM(V.importe)
-        FROM Viajes as V
-        INNER JOIN Tarjetas as T on T.idTarjeta = V.idTarjeta
-    ) as totalAcreditado,
-    SELECT (COUNT(T.idTarjeta)
-        FROM Tarjetas as T 
-        INNER JOIN MOVIMIENTOS as M on M.idTarjeta = T.idTarjeta
-        WHERE M.tipoMovimiento LIKE 'C'
-    ) as cantRecargas,
-    SELECT (AVG(M.importe)
-        FROM Movimientos as M 
-        INNER JOIN Tarjetas as T on M.idTarjeta = T.idTarjeta
-        WHERE M.tipoMovimiento LIKE 'C'
-    ) as cantRecargas,
+    T.apellidoUsuario AS ApellidoUsuario,
+    T.nombreUsuario AS NombreUsuario,
+    T.idTarjeta AS NumeroTarjeta,
+    (SELECT COUNT(idViaje) FROM VIAJES WHERE idTarjeta = T.idTarjeta) AS CantViajes,
+    (SELECT SUM(importe) FROM VIAJES WHERE idTarjeta = T.idTarjeta) AS TotalAcreditado,
+    (SELECT COUNT(idMovimiento) FROM MOVIMIENTOS WHERE idTarjeta = T.idTarjeta AND tipoMovimiento = 'C') AS CantRecargas,
+    (SELECT AVG(importe) FROM MOVIMIENTOS WHERE idTarjeta = T.idTarjeta AND tipoMovimiento = 'C') AS PromedioRecarga,
     CASE
         WHEN T.activo = 1 THEN 'Activa'
         ELSE 'Inactiva'
-    END AS EstadoTarjeta,
+    END AS EstadoTarjeta
+FROM TARJETAS AS T;
 
-FROM Tarjetas as T
 
-SELECT * FROM TARJETAS
-SELECT * FROM VIAJES
-SELECT * FROM MOVIMIENTOS
+
+SELECT * FROM VistaDatosTarjeta
+
+SELECT * FROM Tarjetas
