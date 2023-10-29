@@ -54,6 +54,9 @@ CREATE TABLE COLECTIVOS(
     domicilioLegal varchar(255)
 )
 
+alter table COLECTIVOS
+ADD nroLinea int;
+
 CREATE TABLE VIAJES(
     idViaje int PRIMARY KEY IDENTITY(1,1),
     cuandoFue DATETIME,
@@ -66,6 +69,11 @@ CREATE TABLE VIAJES(
     FOREIGN KEY (idTarjeta) REFERENCES TARJETAS(idTarjeta),
     FOREIGN KEY (dni) REFERENCES USUARIOS(dni)
 )
+ALTER TABLE VIAJES
+ADD activo bit DEFAULT 1;
+
+UPDATE VIAJES
+SET activo = 1
 
 CREATE TABLE MOVIMIENTOS(
     idMovimiento int PRIMARY KEY IDENTITY(1,1),
@@ -76,6 +84,12 @@ CREATE TABLE MOVIMIENTOS(
 
     FOREIGN KEY (idTarjeta) REFERENCES TARJETAS(idTarjeta)
 )
+
+ALTER TABLE MOVIMIENTOS
+ADD activo bit DEFAULT 1;
+
+UPDATE MOVIMIENTOS
+SET activo = 1
 
 INSERT INTO TARJETAS (apellidoUsuario, nombreUsuario, dniUsuario, altaSube, saldo, activo)
 VALUES
