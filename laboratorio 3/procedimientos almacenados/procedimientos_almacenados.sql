@@ -145,3 +145,58 @@ BEGIN
     VALUES (GETDATE(), @nroTarjeta, @importeRecarga, 'C')
 END
 
+--E)  Realizar un procedimiento almacenado llamado sp_Baja_Fisica_Usuario que elimine un usuario del sistema. La eliminación deberá ser 'en cascada'. Esto quiere decir que para cada usuario primero deberán eliminarse todos los viajes y recargas de sus respectivas tarjetas. Luego, todas sus tarjetas y por último su registro de usuario.
+CREATE PROCEDURE sp_Baja_Fisica_Usuario
+    @dni INT
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    BEGIN TRY
+        BEGIN TRANSACTION
+            DELETE FROM VIAJES
+            WHERE dni = @dni
+
+            DELETE FROM MOVIMIENTOS
+            WHERE idTarjeta IN (SELECT idTarjeta FROM TARJETAS WHERE dniUsuario = @dni)
+
+            DELETE FROM TARJETAS
+            WHERE dniUsuario = @dni
+
+            DELETE FROM USUARIOS
+            WHERE dni = @dni
+
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION
+
+        PRINT ERROR_MESSAGE()
+    END CATCH
+END
+
+--Para practicar, hice un baja_Logica
+CREATE PROCEDURE sp_Baja_Logica_Usuario
+    @dni INT
+AS
+BEGIN
+
+    UPDATE MOVIMIENTOS
+    SET ACTIVO = 0
+    WHERE idTarjeta IN (SELECT idTarjeta FROM TARJETAS WHERE dniUsuario = @dni)
+
+    UPDATE VIAJES
+    SET ACTIVO = 0
+    WHERE dni = @dni
+
+    UPDATE TARJETAS
+    SET ACTIVO = 0
+    WHERE dniUsuario = @dni
+
+    UPDATE USUARIOS
+    SET activo = 0
+    WHERE dni = @dni
+
+END
+
