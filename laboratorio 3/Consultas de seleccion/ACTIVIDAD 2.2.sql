@@ -73,6 +73,12 @@ CREATE TABLE Tarjeta (
     FOREIGN KEY (idMarca) REFERENCES marca(id)
 );
 
+ALTER TABLE Tarjeta
+ADD activo BIT DEFAULT 1;
+
+UPDATE Tarjeta
+SET activo = 1;
+
 CREATE TABLE BilleteraVirtualXTarjeta (
     id INT PRIMARY KEY IDENTITY(1, 1),
     idTarjeta INT,
