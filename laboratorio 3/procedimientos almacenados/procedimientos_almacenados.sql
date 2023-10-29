@@ -81,6 +81,67 @@ END
 
 use vistas
 
+CREATE PROCEDURE sp_Agregar_Viaje(
+    @nroTarjeta int,
+    @importeViaje decimal,
+    @codigoLinea int,
+    @nroLinea int
+)
+AS
+BEGIN
+    DECLARE @saldoActual DECIMAL;
+    DECLARE @nuevoSaldo DECIMAL;
+
+    BEGIN TRY
+        --Obtenemos saldo actual
+        SELECT @saldoActual = saldo
+        from TARJETAS
+        WHERE idTarjeta = @nroTarjeta
 
 
+        --Verificamos que el importe del viaje no exceda los $2000 de deuda
+        IF (@saldoActual - @importeViaje) < -2000
+        BEGIN
+            RAISEERROR('NO SE PUEDE REALIZAR EL MOVIMIENTO, SALDO INSUFICIENTE',16,1)
+        END
+
+        --Actualizamos saldo
+        SET @nuevoSaldo = @saldoActual - @importeViaje;
+        UPDATE TARJETAS
+        SET saldo = @nuevoSaldo
+        WHERE idTarjeta = @nroTarjeta;
+
+        --Registramos movimiento
+        INSERT INTO MOVIMIENTOS (fecha, idTarjeta, importe, tipoMovimiento)
+        VALUES (GETDATE(), @nroTarjeta, @importeViaje, 'D');
+
+    END TRY
+    BEGIN CATCH
+        SELECT ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END
+
+
+--D) Realizar un procedimiento almacenado llamado sp_Agregar_Saldo que registre un movimiento de crédito a una tarjeta en particular. El procedimiento debe recibir: El número de tarjeta y el importe a recargar. Modificar el saldo de la tarjeta.
+CREATE PROCEDURE sp_Agregar_Saldo
+    @nroTarjeta INT,
+    @importeRecarga DECIMAL
+AS
+BEGIN
+    DECLARE @saldoActual DECIMAL;
+    DECLARE @nuevoSaldo DECIMAL;
+
+    SELECT @saldoActual = saldo
+    FROM TARJETAS
+    WHERE idTarjeta = @nroTarjeta
+
+    SET @nuevoSaldo = @saldoActual + @importeRecarga
+
+    UPDATE TARJETAS
+    SET SALDO = @nuevoSaldo
+    WHERE idTarjeta = @nroTarjeta
+
+    INSERT INTO MOVIMIENTOS (fecha, idTarjeta, importe, tipoMovimiento)
+    VALUES (GETDATE(), @nroTarjeta, @importeRecarga, 'C')
+END
 
