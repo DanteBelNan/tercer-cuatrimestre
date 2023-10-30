@@ -1,6 +1,66 @@
 -- Legajo: 2634
 -- Apellido y nombre: Beltrán, Dante
 
+use master
+go
+Create Database ModeloExamen
+go
+Use ModeloExamen
+go
+Create Table Clientes(
+    ID bigint not null primary key identity (1, 1),
+    Apellidos varchar(100) not null,
+    Nombres varchar(100) not null,
+    Telefono varchar(30) null,
+    Email varchar(120) null,
+    TelefonoVerificado bit not null,
+    EmailVerificado bit not null
+)
+go
+Create Table Vehiculos(
+    ID bigint not null primary key identity (1, 1),
+    Patente varchar(8) not null unique,
+    AñoPatentamiento smallint not null,
+    Marca varchar(50) not null,
+    Modelo varchar(50) not null 
+)
+go
+Create Table Choferes(
+    ID bigint not null primary key identity (1, 1),
+    Apellidos varchar(100) not null,
+    Nombres varchar(100) not null,
+    FechaRegistro date not null,
+    FechaNacimiento date not null,
+    IDVehiculo bigint not null foreign key references Vehiculos(ID),
+    Suspendido bit not null default(0)
+)
+go
+Create Table FormasPago(
+    ID int not null primary key identity (1, 1),
+    Nombre varchar(50) not null
+)
+go
+Create Table Viajes(
+    ID bigint not null primary key identity(1, 1),
+    IDCliente bigint null foreign key references Clientes(ID),
+    IDChofer bigint not null foreign key references Choferes(ID),
+    FormaPago int null foreign key references FormasPago(ID),
+    Inicio datetime null,
+    Fin datetime null,
+    Kms decimal(10, 2) not null,
+    Importe money not null,
+    Pagado bit not null
+)
+go
+Create Table Puntos(
+    ID bigint not null primary key identity (1, 1),
+    IDCliente bigint not null foreign key references Clientes(ID),
+    IDViaje bigint null foreign key references Viajes(ID),
+    Fecha datetime not null default(getdate()),
+    PuntosObtenidos int not null,
+    FechaVencimiento date not null
+)
+
 use ModeloExamen
 
 -- 1) Se pide agregar una modificación a la base de datos para que permita registrar la calificación (de 1 a 10) que el Cliente le otorga al Chofer en un viaje y además una observación opcional. Lo mismo debe poder registrar el Chofer del Cliente.
@@ -9,13 +69,7 @@ use ModeloExamen
 --  Sólo se puede realizar una calificación por viaje del Cliente al Chofer.
 --  Sólo se puede realizar una calificación por viaje del Chofer al Cliente.
 --  Puede haber viajes que no registren calificación por parte del Chofer o del Cliente.
-CREATE TABLE Clasificaciones(
-    IDViaje BIGINT NOT NULL PRIMARY KEY FOREIGN KEY REFERENCES Viajes(id),
-    CalificacionAlChofer TINYINT not null check (CalificacionAlChofer BETWEEN 1 AND 10),
-    ObservacionesAlChofer text null,
-    CalificacionAlCliente TINYINT not null check (CalificacionAlCliente BETWEEN 1 AND 10),
-    ObservacionesAlCliente text null
-)
+
 
 
 -- 2) Realizar una vista llamada VW_ClientesDeudores que permita listar: Apellidos, Nombres, Contacto (indica el email de contacto, si no lo tiene el teléfono y de lo contrario "Sin datos de contacto"), cantidad de viajes totales, cantidad de viajes no abonados y total adeudado. Sólo listar aquellos clientes cuya cantidad de viajes no abonados sea superior a la mitad de viajes totales realizados.
@@ -58,57 +112,3 @@ as begin
     ) as Punto3
     Where Punto3.CantViajesEfectivoAnio = Punto3.CantViajesAnio and Punto3.CantViajesAnio > 0
 end
-
-
--- 4) Realizar un trigger que al borrar un cliente, primero le quite todos los puntos (baja física) y establecer a NULL todos los viajes de ese cliente. Luego, eliminar físicamente el cliente de la base de datos.
-CREATE TRIGGER TR_EliminarCliente On Clientes
-Instead of DELETE
-AS 
-BEGIN
-    BEGIN TRY
-        BEGIN TRAN
-             --Borramos fisicamente todos los puntos del cliente
-            Declare @ID bigint
-            SET @id = (select id from deleted)
-
-            DELETE FROM PUNTOS WHERE IDCliente = @ID
-            UPDATE VIAJES SET IDCliente = NULL WHERE IDCLIENTE = @ID
-            DELETE FROM CLIENTES WHERE ID = @ID
-
-        COMMIT
-    END TRY
-    BEGIN CATCH
-        ROLLBACK
-        RAISERROR('Error al eliminar cliente', 16,1)
-    END CATCH
-
-END
-
-
-SELECT * FROM Clientes WHERE ID = 41
-SELECT * FROM Viajes WHERE IDCliente = 41
-SELECT * FROM Puntos WHERE IDCliente = 41
-
-SELECT * FROM Viajes WHERE ID = 493 OR ID = 1253
-
-DELETE FROM Clientes WHERE ID = 41
-
-
--- 5) Realizar un trigger que garantice que el Cliente sólo pueda calificar al Chofer si el viaje se encuentra pagado. Caso contrario indicarlo con un mensaje aclaratorio.
-CREATE TRIGGER TR_InsertarCalificacionAlChofer ON Clasificaciones
-AFTER INSERT
-AS
-BEGIN
-    BEGIN TRANSACTION
-        Declare @IDVIAJE BIGINT
-        Declare @PAGADO BIT
-
-        SET @IDVIAJE = (SELECT IDViaje from inserted)
-        SET @PAGADO = (SELECT PAGADO FROM VIAJES WHERE ID = @IDVIAJE)
-
-        IF @PAGADO = 0 BEGIN
-            ROLLBACK
-            RAISERROR('Viaje no pagado, por lo tanto no se clasifica', 16, 1)
-        END
-    COMMIT TRANSACTION
-END
