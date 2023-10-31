@@ -102,7 +102,7 @@ BEGIN
         --Verificamos que el importe del viaje no exceda los $2000 de deuda
         IF (@saldoActual - @importeViaje) < -2000
         BEGIN
-            RAISEERROR('NO SE PUEDE REALIZAR EL MOVIMIENTO, SALDO INSUFICIENTE',16,1)
+            RAISERROR('NO SE PUEDE REALIZAR EL MOVIMIENTO, SALDO INSUFICIENTE',16,1)
         END
 
         --Actualizamos saldo
