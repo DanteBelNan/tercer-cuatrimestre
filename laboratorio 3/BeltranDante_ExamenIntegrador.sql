@@ -4,35 +4,35 @@ Use DanteBeltran
 
 CREATE TABLE Carreras(
     IDCarrera bigint not null primary key identity (1, 1),
-    Nombre varchar(50)
+    Nombre varchar(50) not null
 )
 
 CREATE TABLE Materias(
     IDMateria bigint not null primary key identity (1, 1),
     IDCarrera bigint foreign key references Carreras(IDCarrera),
-    Nombre varchar(50),
-    Año smallint not null CHECK (Año > 0),
+    Nombre varchar(50) not null,
+    Año smallint not null CHECK (Año > 0) not null,
     Cuatrimestre bit
 )
 
 CREATE TABLE Alumnos (
     Legajo bigint not null PRIMARY KEY,
-    Nombres varchar(50),
-    Apellidos varchar(50)
+    Nombres varchar(50) not null,
+    Apellidos varchar(50) not null
 )
 
 CREATE TABLE Examenes(
     IDExamen bigint not null primary key identity (1, 1),
     IDMateria bigint FOREIGN KEY REFERENCES Materias(IDMateria),
     Legajo bigint FOREIGN KEY REFERENCES Alumnos(Legajo),
-    Fecha datetime,
+    Fecha datetime not null,
     Nota decimal(4, 2) CHECK (Nota >= 0 AND Nota <= 10)
 )
 
 CREATE TABLE Sanciones(
     IDSancion bigint not null primary key identity (1, 1),
     Legajo bigint FOREIGN KEY REFERENCES Alumnos(Legajo),
-    Fecha datetime,
+    Fecha datetime not null,
     Observacion varchar(500)
 )
 
@@ -50,7 +50,7 @@ FROM Alumnos AS A
 INNER JOIN Examenes AS E ON E.Legajo = A.Legajo
 INNER JOIN Materias AS M ON M.IDMateria = E.IDMateria
 INNER JOIN Carreras AS C ON C.IDCarrera = M.IDCarrera
-WHERE A.Legajo NOT IN (SELECT Legajo FROM Sanciones) 
+WHERE A.Legajo NOT IN (SELECT Legajo FROM Sanciones) -- No entiendo en que cambiaria un distinct (talvez se ahorra vueltas haciendolo mas eficiente)
 AND C.Nombre IN ('Ingeniería Mecánica', 'Tecnicatura en Programación')
 GROUP BY A.Legajo, A.Nombres, A.Apellidos
 ORDER BY Promedio DESC
@@ -64,7 +64,7 @@ SELECT A.Legajo, A.Nombres, A.Apellidos,
     WHERE Legajo = A.Legajo
 ) as cantSanciones
 FROM Alumnos as A
-INNER JOIN Examenes as E on E.Legajo = A.Legajo
+LEFT JOIN Examenes as E on E.Legajo = A.Legajo
 WHERE (
     SELECT MIN(Nota) From Examenes Where Legajo = A.Legajo
 ) >= 6
@@ -116,3 +116,35 @@ BEGIN
         ROLLBACK TRANSACTION
     END CATCH
 END
+
+CREATE TRIGGER tr_SubirArchivo ON Archivos
+INSTEAD OF INSERT
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION
+            DECLARE @IDUsuario bigint = (SELECT IDUsuario from inserted)
+            DECLARE @TipoCuenta bigint = (SELECT IDTipoCuenta from Usuarios where IDUsuario = @IDUsuario)
+            DECLARE @MBArchivo int = (SELECT TamañoEnMB from inserted)
+
+            IF @MBArchivo + (SELECT SUM(TamañoEnMB) FROM Archivos WHERE IDUsuario = @IDUsuario) > (SELECT CapacidadEnMB FROM TiposCuentas WHERE IDTipoCuenta = @TipoCuenta) AND (SELECT Nombre FROM TiposCuentas WHERE IDTipoCuenta = @TipoCuenta) NOT LIKE 'Ilimitada'
+            BEGIN
+                UPDATE Usuarios SET IDTipoCuenta = @TipoCuenta + 1
+                WHERE IDUsuario = @IDUsuario
+                INSERT INTO CambiosDeCuenta (IDUsuario, IDTipoCuentaAnterior, IDTipoCuentaActual, Fecha)
+                VALUES (@IDUsuario, @TipoCuenta, @TipoCuenta + 1, GETDATE());
+            END
+
+            INSERT INTO Archivos (IDUsuario, NombreArchivo, Descripcion, Extension, TamañoEnMB, FechaPublicacion)
+            SELECT IDUsuario, NombreArchivo, Descripcion, Extension, TamañoEnMB, GETDATE()
+            FROM inserted;
+            
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+        ROLLBACK TRANSACTION
+    END CATCH
+END
+
+select * from TiposCuentas
