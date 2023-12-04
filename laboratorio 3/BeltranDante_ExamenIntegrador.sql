@@ -9,7 +9,7 @@ CREATE TABLE Carreras(
 
 CREATE TABLE Materias(
     IDMateria bigint not null primary key identity (1, 1),
-    IDCarrera bigint foreign key references Carreras(IDCarrera),
+    IDCarrera bigint not null foreign key references Carreras(IDCarrera),
     Nombre varchar(50) not null,
     Año smallint not null CHECK (Año > 0) not null,
     Cuatrimestre bit
@@ -23,18 +23,19 @@ CREATE TABLE Alumnos (
 
 CREATE TABLE Examenes(
     IDExamen bigint not null primary key identity (1, 1),
-    IDMateria bigint FOREIGN KEY REFERENCES Materias(IDMateria),
-    Legajo bigint FOREIGN KEY REFERENCES Alumnos(Legajo),
+    IDMateria bigint not null FOREIGN KEY REFERENCES Materias(IDMateria),
+    Legajo bigint not null FOREIGN KEY REFERENCES Alumnos(Legajo),
     Fecha datetime not null,
     Nota decimal(4, 2) CHECK (Nota >= 0 AND Nota <= 10)
 )
 
 CREATE TABLE Sanciones(
     IDSancion bigint not null primary key identity (1, 1),
-    Legajo bigint FOREIGN KEY REFERENCES Alumnos(Legajo),
+    Legajo bigint not null FOREIGN KEY REFERENCES Alumnos(Legajo),
     Fecha datetime not null,
     Observacion varchar(500)
 )
+
 
 --2) Listar los mejores 5 estudiantes entre las carreras "Tecnicatura en Programación" e "Ingeniería Mecánica" para otorgarles una beca. Para seleccionarlos a la beca, el criterio de aceptación es el promedio general de los últimos dos años (es decir, el año actual y el anterior) y no haber registrado nunca una sanción.
 
